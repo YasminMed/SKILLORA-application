@@ -11,7 +11,6 @@ class Note {
   final String title;
   final String content;
   final NoteCategory category;
-  final List<String> tags;
   final bool isPinned;
   final Color? customColor;
 
@@ -20,7 +19,6 @@ class Note {
     required this.title,
     required this.content,
     required this.category,
-    required this.tags,
     this.isPinned = false,
     this.customColor,
   });
@@ -79,7 +77,6 @@ class _NotesWidgetState extends State<NotesWidget> {
       title: 'Data Structures Final Review',
       content: 'Key concepts: Binary Search Trees, Hash Tables, Graph Algorithms.',
       category: NoteCategory.computer_science,
-      tags: ['algorithms', 'exam'],
       
       isPinned: true,
     ),
@@ -88,7 +85,6 @@ class _NotesWidgetState extends State<NotesWidget> {
       title: 'Linear Algebra - Matrix Operations',
       content: 'Matrix multiplication rules, determinants, eigenvalues and eigenvectors.',
       category: NoteCategory.mathematics,
-      tags: ['math', 'homework'],
       isPinned: true,
     ),
     Note(
@@ -96,7 +92,6 @@ class _NotesWidgetState extends State<NotesWidget> {
       title: 'E-commerce Project Tasks',
       content: 'Todo: Complete payment gateway integration, add product search filters.',
       category: NoteCategory.project,
-      tags: ['project', 'development'],
     ),
   ];
 
@@ -110,8 +105,7 @@ class _NotesWidgetState extends State<NotesWidget> {
     if (searchQuery.isNotEmpty) {
       filtered = filtered.where((note) {
         return note.title.toLowerCase().contains(searchQuery.toLowerCase()) ||
-            note.content.toLowerCase().contains(searchQuery.toLowerCase()) ||
-            note.tags.any((tag) => tag.toLowerCase().contains(searchQuery.toLowerCase()));
+            note.content.toLowerCase().contains(searchQuery.toLowerCase());
       }).toList();
     }
 
