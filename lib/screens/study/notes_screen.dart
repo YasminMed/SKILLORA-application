@@ -4,19 +4,7 @@ import '../../constants/app_text_styles.dart';
 
 enum NoteCategory { computer_science, mathematics, project }
 
-class NoteAttachment {
-  final String id;
-  final String name;
-  final String size;
-  final String? url;
 
-  NoteAttachment({
-    required this.id,
-    required this.name,
-    required this.size,
-    this.url,
-  });
-}
 
 class Note {
   final String id;
@@ -24,7 +12,6 @@ class Note {
   final String content;
   final NoteCategory category;
   final List<String> tags;
-  final List<NoteAttachment> attachments;
   final bool isPinned;
   final Color? customColor;
 
@@ -34,7 +21,6 @@ class Note {
     required this.content,
     required this.category,
     required this.tags,
-    required this.attachments,
     this.isPinned = false,
     this.customColor,
   });
@@ -94,13 +80,7 @@ class _NotesWidgetState extends State<NotesWidget> {
       content: 'Key concepts: Binary Search Trees, Hash Tables, Graph Algorithms.',
       category: NoteCategory.computer_science,
       tags: ['algorithms', 'exam'],
-      attachments: [
-        NoteAttachment(
-          id: 'a1',
-          name: 'BST_Notes.pdf',
-          size: '1.2 MB',
-        ),
-      ],
+      
       isPinned: true,
     ),
     Note(
@@ -109,7 +89,6 @@ class _NotesWidgetState extends State<NotesWidget> {
       content: 'Matrix multiplication rules, determinants, eigenvalues and eigenvectors.',
       category: NoteCategory.mathematics,
       tags: ['math', 'homework'],
-      attachments: [],
       isPinned: true,
     ),
     Note(
@@ -118,7 +97,6 @@ class _NotesWidgetState extends State<NotesWidget> {
       content: 'Todo: Complete payment gateway integration, add product search filters.',
       category: NoteCategory.project,
       tags: ['project', 'development'],
-      attachments: [],
     ),
   ];
 
@@ -156,7 +134,6 @@ class _NotesWidgetState extends State<NotesWidget> {
   Widget build(BuildContext context) {
     final totalNotes = notes.length;
     final pinnedNotes = notes.where((n) => n.isPinned).length;
-    final withAttachments = notes.where((n) => n.attachments.isNotEmpty).length;
 
     return Container(
       decoration: BoxDecoration(
@@ -174,7 +151,7 @@ class _NotesWidgetState extends State<NotesWidget> {
         children: [
           _buildAppBar(context),
           const SizedBox(height: 24),
-          _buildStatsCards(totalNotes, pinnedNotes, withAttachments),
+          _buildStatsCards(totalNotes, pinnedNotes, notes.length),
           _buildFilterChips(),
           Expanded(child: _buildNotesList()),
         ],
