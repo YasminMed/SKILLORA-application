@@ -55,7 +55,6 @@ class TimelineScreen extends StatefulWidget {
 }
 
 class _TimelineScreenState extends State<TimelineScreen> {
-  final ScrollController _scrollController = ScrollController();
   String selectedFilter = 'All';
 
   final List<TimelineEvent> timelineEvents = [
@@ -127,7 +126,6 @@ class _TimelineScreenState extends State<TimelineScreen> {
             _buildAppBar(context),
             Expanded(
               child: SingleChildScrollView(
-                controller: _scrollController,
                 padding: const EdgeInsets.all(20),
                 physics: const BouncingScrollPhysics(),
                 child: Column(
