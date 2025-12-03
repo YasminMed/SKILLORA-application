@@ -102,12 +102,6 @@ class _TimelineScreenState extends State<TimelineScreen> {
   }
 
   @override
-  void dispose() {
-    _scrollController.dispose();
-    super.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
     final counts = {
       'Completed': timelineEvents.where((e) => e.status == TimelineEventStatus.completed).length,
