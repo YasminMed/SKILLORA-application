@@ -23,7 +23,7 @@ class CVAnalyzerApp extends StatelessWidget {
   }
 }
 
-// ================= CV Analyzer Widget =================
+
 class CVAnalyzerWidget extends StatefulWidget {
   const CVAnalyzerWidget({Key? key}) : super(key: key);
 
@@ -80,7 +80,7 @@ class _CVAnalyzerWidgetState extends State<CVAnalyzerWidget> {
     );
   }
 
-  // ================= Upload View =================
+  // upload view
   Widget _buildUploadView() {
     return Column(
       children: [
@@ -206,7 +206,7 @@ class _CVAnalyzerWidgetState extends State<CVAnalyzerWidget> {
     );
   }
 
-  // ================= Analysis View =================
+  // analysis view
   Widget _buildAnalysisView() {
     final strengths = [
       'Strong technical skills section',
@@ -372,7 +372,7 @@ class _CVAnalyzerWidgetState extends State<CVAnalyzerWidget> {
   }
 }
 
-// ================= Career Details Widget =================
+// career details widget
 class CareerDetailsWidget extends StatelessWidget {
   const CareerDetailsWidget({Key? key}) : super(key: key);
 

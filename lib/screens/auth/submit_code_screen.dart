@@ -32,7 +32,7 @@ class SubmitCodeScreen extends StatelessWidget {
               children: [
                 const SizedBox(height: 10),
 
-                /// BACK BUTTON
+                //back btn
                 Row(
                   children: [
                     IconButton(
@@ -44,7 +44,7 @@ class SubmitCodeScreen extends StatelessWidget {
 
                 const SizedBox(height: 20),
 
-                /// TITLE
+                //title
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 24),
                 child: Column(
@@ -71,7 +71,7 @@ class SubmitCodeScreen extends StatelessWidget {
 
                 const SizedBox(height: 40),
 
-                /// WHITE CARD
+                //white card
                 Container(
                   height: 400,
                   padding: const EdgeInsets.all(24),
@@ -104,7 +104,7 @@ class SubmitCodeScreen extends StatelessWidget {
                       
                     ),
                     SizedBox(height: 70,),
-                      /// OTP ROW
+                      /// OTP row 
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: List.generate(

@@ -23,9 +23,7 @@ class MyApp extends StatelessWidget {
   }
 }
 
-// ============================================================================
-// APPBAR WIDGET
-// ============================================================================
+//appbar
 class AppBarWidget extends StatelessWidget implements PreferredSizeWidget {
   const AppBarWidget({super.key, this.title = "Career Roadmap"});
   final String title;
@@ -62,9 +60,7 @@ class AppBarWidget extends StatelessWidget implements PreferredSizeWidget {
   Size get preferredSize => const Size.fromHeight(60);
 }
 
-// ============================================================================
-// CAREER ROADMAP SCREEN WIDGET
-// ============================================================================
+//roadmap screen
 class CareerRoadmapScreenWidget extends StatelessWidget {
   const CareerRoadmapScreenWidget({super.key});
 
@@ -338,14 +334,10 @@ class CareerRoadmapScreenWidget extends StatelessWidget {
   }
 }
 
-// ============================================================================
-// ENUM
-// ============================================================================
+
 enum RoadmapStatus { completed, current, upcoming, future }
 
-// ============================================================================
-// CUSTOMIZE ROADMAP SHEET
-// ============================================================================
+
 class CustomizeRoadmapSheet extends StatefulWidget {
   const CustomizeRoadmapSheet({super.key});
 

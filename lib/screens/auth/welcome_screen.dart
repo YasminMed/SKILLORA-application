@@ -13,7 +13,7 @@ class WelcomeScreen extends StatelessWidget {
         width: double.infinity,
         height: double.infinity,
 
-        /// Background gradient
+        
         decoration: const BoxDecoration(
           gradient: LinearGradient(
             colors: [
@@ -31,12 +31,12 @@ class WelcomeScreen extends StatelessWidget {
           children: [
             const SizedBox(height: 40),
 
-            /// LOGO
+            /// logo
             Image.asset("assets/images/logo.png", width: 150, height: 150),
 
             const SizedBox(height: 40),
 
-            /// TITLE
+            /// title
             Text.rich(
               TextSpan(
                 children: [
@@ -98,7 +98,7 @@ class WelcomeScreen extends StatelessWidget {
 
             const SizedBox(height: 200),
 
-            /// MAIN BUTTON
+            /// btn
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 30.0),
               child: SizedBox(

@@ -12,7 +12,7 @@ class StudyProfileWidget extends StatelessWidget {
         color: AppColors.white,
         child: Column(
           children: [
-            // ---------------- Custom AppBar ----------------
+            // appbar
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 14),
               decoration: const BoxDecoration(
@@ -47,7 +47,7 @@ class StudyProfileWidget extends StatelessWidget {
               ),
             ),
 
-            // ---------------- Body ----------------
+            // body
             Expanded(
               child: SingleChildScrollView(
                 padding: const EdgeInsets.all(20),
@@ -176,7 +176,7 @@ class StudyProfileWidget extends StatelessWidget {
     );
   }
 
-  // ---------------- Section Title ----------------
+  // sec title
   Widget _sectionTitle(String title) {
     return Container(
       width: double.infinity,
@@ -193,7 +193,7 @@ class StudyProfileWidget extends StatelessWidget {
     );
   }
 
-  // ---------------- Profile Action Tile ----------------
+  //action tile
   Widget _profileAction({
     required IconData icon,
     required String text,
@@ -240,7 +240,7 @@ class StudyProfileWidget extends StatelessWidget {
     );
   }
 
-  // ---------------- Confirm Dialog ----------------
+  // confirm dialog
   void _confirmAction(BuildContext context,
       {required String title,
       required String message,
@@ -280,7 +280,7 @@ class StudyProfileWidget extends StatelessWidget {
     );
   }
 
-  // ---------------- Bottom Sheets ----------------
+  // bottom sheets
 
   void _editNameSheet(BuildContext context) {
     showModalBottomSheet(
@@ -366,8 +366,8 @@ class StudyProfileWidget extends StatelessWidget {
   void _switchCareerSheet(BuildContext context) {
   showModalBottomSheet(
     context: context,
-    isScrollControlled: true, // يجعلها full width بالعرض الكامل
-    backgroundColor: Colors.transparent, // نتحكم بالزوايا واللون داخل الـ container
+    isScrollControlled: true, //full width
+    backgroundColor: Colors.transparent, 
     builder: (context) {
       return Container(
         width: double.infinity,
@@ -386,7 +386,7 @@ class StudyProfileWidget extends StatelessWidget {
                     color: AppColors.primary)),
             const SizedBox(height: 16),
             SizedBox(
-              width: 200, // الزر يبقى بنفس الحجم كما طلبت
+              width: 200, 
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
                   backgroundColor: AppColors.primary,

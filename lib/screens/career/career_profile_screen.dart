@@ -2,9 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:skillora/constants/app_colors_career.dart';
 import 'package:skillora/constants/app_text_styles.dart';
 
-// ============================================================================
-// NEW APPBAR WIDGET
-// ============================================================================
+//appbar
 class AppBarWidget extends StatelessWidget implements PreferredSizeWidget {
   const AppBarWidget({super.key, this.title = "Career Profile"});
 
@@ -56,9 +54,7 @@ class AppBarWidget extends StatelessWidget implements PreferredSizeWidget {
   Size get preferredSize => const Size.fromHeight(56);
 }
 
-// ============================================================================
-// MAIN APP
-// ============================================================================
+//main app
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
@@ -76,9 +72,7 @@ class MyApp extends StatelessWidget {
   }
 }
 
-// ============================================================================
-// CAREER PROFILE SCREEN
-// ============================================================================
+//profile screen
 class CareerProfileScreen extends StatelessWidget {
   const CareerProfileScreen({super.key});
 
@@ -201,9 +195,7 @@ class CareerProfileScreen extends StatelessWidget {
     );
   }
 
-  // ================================================================
-  // SECTION TITLE
-  // ================================================================
+//sec title
   Widget _sectionTitle(String title) {
     return Container(
       width: double.infinity,
@@ -219,9 +211,7 @@ class CareerProfileScreen extends StatelessWidget {
     );
   }
 
-  // ================================================================
-  // PROFILE ACTION TILE
-  // ================================================================
+//action tile
   Widget _profileAction({
     required IconData icon,
     required String text,
@@ -272,9 +262,7 @@ class CareerProfileScreen extends StatelessWidget {
     );
   }
 
-  // ================================================================
-  // CONFIRM DIALOG
-  // ================================================================
+//confirm dialog
   void _confirmAction(
     BuildContext context, {
     required String title,
@@ -328,9 +316,7 @@ class CareerProfileScreen extends StatelessWidget {
     );
   }
 
-  // ================================================================
-  // BOTTOM SHEETS
-  // ================================================================
+//bottom sheets
   void _editNameSheet(BuildContext context) {
     showModalBottomSheet(
       context: context,

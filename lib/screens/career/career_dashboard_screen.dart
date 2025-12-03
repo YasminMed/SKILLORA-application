@@ -55,6 +55,7 @@ class CareerDashboardWidget extends StatelessWidget {
   }
 }
 
+//appbar
 class AppBarWidget extends StatelessWidget {
   final String userName;
 
@@ -155,9 +156,9 @@ class AppBarWidget extends StatelessWidget {
   }
 }
 
-// ============================================================================
-// CIRCULAR PROGRESS PAINTER & WIDGET
-// ============================================================================
+
+
+//circular progress widget 
 
 class CircularProgressPainter extends CustomPainter {
   final double percentage;
@@ -267,10 +268,7 @@ class CircularProgressWidget extends StatelessWidget {
   }
 }
 
-// ============================================================================
-// CAREER PROGRESS WIDGET
-// ============================================================================
-
+//career progress
 class CareerProgressWidget extends StatelessWidget {
   final int goalsCompleted;
   final int totalGoals;
@@ -405,10 +403,7 @@ class CareerProgressWidget extends StatelessWidget {
   }
 }
 
-// ============================================================================
-// RECENT ACTIVITIES WIDGET
-// ============================================================================
-
+//recent activities
 class Activity {
   final String title;
   final int progress;
@@ -571,10 +566,7 @@ class RecentActivitiesWidget extends StatelessWidget {
   }
 }
 
-// ============================================================================
-// CAREER SUGGESTIONS WIDGET
-// ============================================================================
-
+//suggestions
 class CareerSuggestion {
   final String title;
   final String description;
@@ -720,10 +712,7 @@ class CareerSuggestionsWidget extends StatelessWidget {
   }
 }
 
-// ============================================================================
-// PEOPLE WIDGET
-// ============================================================================
-
+//people
 class Person {
   final String name;
   final String role;

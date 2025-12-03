@@ -126,9 +126,7 @@ class _PathSelectionScreenState extends State<PathSelectionScreen>
   }
 }
 
-// ============================================================================
-// PATH CARD WIDGET
-// ============================================================================
+//path cards widget
 
 class _PathCard extends StatefulWidget {
   final String title;

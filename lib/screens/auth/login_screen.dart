@@ -35,7 +35,7 @@ class LoginScreen extends StatelessWidget {
               children: [
                 const SizedBox(height: 10),
 
-                /// BACK BUTTON
+                //back btn
                 Row(
                   children: [
                     IconButton(
@@ -48,7 +48,7 @@ class LoginScreen extends StatelessWidget {
 
                 const SizedBox(height: 20),
 
-               /// TITLE
+               //title
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 24),
                 child: Column(
@@ -75,7 +75,7 @@ class LoginScreen extends StatelessWidget {
 
                 const SizedBox(height: 40),
 
-                /// WHITE CARD
+                //white card
                 Container(
                   height: 400,
                   padding: const EdgeInsets.all(24),
@@ -96,7 +96,9 @@ class LoginScreen extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       SizedBox(height: 20,),
-                      /// Email
+
+
+                      //email
                     Text("Email", style: AppTextStyles.secondary. copyWith(color: Colors.black),),
                     SizedBox(
                       height: 40,
@@ -119,7 +121,7 @@ class LoginScreen extends StatelessWidget {
                       const SizedBox(height: 12),
                       
 
-                    /// FORGOT PASSWORD
+                     //forgot pass
                       Align(
                         alignment: Alignment.centerRight,
                         child: GestureDetector(
@@ -168,7 +170,7 @@ class LoginScreen extends StatelessWidget {
 
                       const SizedBox(height: 20),
 
-                      /// SIGN UP LINK
+                      //signup link
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [

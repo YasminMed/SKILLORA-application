@@ -54,7 +54,7 @@ class _CourseListScreenState extends State<CourseListScreen> {
         child: Column(
           children: [
             
-            // Custom App Bar
+            //App Bar
             Container(
             decoration: BoxDecoration(
               gradient: const LinearGradient(colors: [AppColors.primary, AppColors.accent]),
@@ -62,7 +62,7 @@ class _CourseListScreenState extends State<CourseListScreen> {
             ),
             padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 14),
             child: 
-                // const SizedBox(width: 12),
+                
               Center(child: Text('Courses', style: AppTextStyles.h2.copyWith(color: AppColors.white, fontSize: 20))),
               
           ),
@@ -158,6 +158,8 @@ class _CourseListScreenState extends State<CourseListScreen> {
                     ],
                   ),
                   const SizedBox(height: 6),
+
+                  
                   // Progress Bar
                   Row(
                     children: [

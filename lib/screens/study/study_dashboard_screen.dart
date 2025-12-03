@@ -158,10 +158,7 @@ class AppBarWidget extends StatelessWidget {
   }
 }
 
-// ============================================================================
-// CIRCULAR PROGRESS PAINTER
-// ============================================================================
-
+// circular progress painter
 class CircularProgressPainter extends CustomPainter {
   final double percentage;
   final Color activeColor;
@@ -212,9 +209,7 @@ class CircularProgressPainter extends CustomPainter {
   bool shouldRepaint(CustomPainter oldDelegate) => true;
 }
 
-// ============================================================================
-// CIRCULAR PROGRESS WIDGET
-// ============================================================================
+//circular progress widget
 
 class CircularProgressWidget extends StatelessWidget {
   final double percentage;
@@ -591,8 +586,7 @@ Widget _buildCourseCard(Course course) {
               'Continue',
               style: TextStyle(
                 color: AppColors.white,
-
-fontSize: 14,
+                fontSize: 14,
                 fontWeight: FontWeight.w600,
               ),
             ),
@@ -818,22 +812,22 @@ class PeopleYouMayKnowWidget extends StatelessWidget {
 
   static final List<Person> people = [
     Person(
-      name: 'Sarah Johnson',
+      name: 'Sarah mo.',
       field: 'Computer Science',
-      initials: 'SJ',
+      initials: 'AM',
     ),
     Person(
-      name: 'Michael Chen',
+      name: 'Saleh Aiman',
       field: 'Data Analytics',
-      initials: 'MC',
+      initials: 'SA',
     ),
     Person(
-      name: 'Emma Williams',
+      name: 'Ahmen Waleed',
       field: 'UX Design',
-      initials: 'EW',
+      initials: 'AW',
     ),
     Person(
-      name: 'James Martinez',
+      name: 'Jalal Muneer',
       field: 'Software Engineering',
       initials: 'JM',
     ),

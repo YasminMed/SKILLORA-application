@@ -20,9 +20,7 @@ class MyApp extends StatelessWidget {
   }
 }
 
-// ============================================================================
-// APPBAR WIDGET (No Back Arrow, Small Gradient, FontSize 22)
-// ============================================================================
+//appbar
 class AppBarWidget extends StatelessWidget implements PreferredSizeWidget {
   const AppBarWidget({super.key, this.title = "Find Jobs"});
 
@@ -60,9 +58,7 @@ class AppBarWidget extends StatelessWidget implements PreferredSizeWidget {
   Size get preferredSize => const Size.fromHeight(60);
 }
 
-// ============================================================================
-// JOB MODEL
-// ============================================================================
+//job models
 class Job {
   final int id;
   final String title;
@@ -83,9 +79,7 @@ class Job {
   });
 }
 
-// ============================================================================
-// PASTEL JOB FINDER WIDGET
-// ============================================================================
+//job finder screen
 class PastelJobFinderWidget extends StatefulWidget {
   const PastelJobFinderWidget({Key? key}) : super(key: key);
 
@@ -168,7 +162,6 @@ class _PastelJobFinderWidgetState extends State<PastelJobFinderWidget> {
         color: AppColors.softGreen,
         child: Column(
           children: [
-            // 🔹 APPBAR
             const AppBarWidget(title: "Find Jobs"),
       
             Expanded(
@@ -176,7 +169,7 @@ class _PastelJobFinderWidgetState extends State<PastelJobFinderWidget> {
                 padding: const EdgeInsets.all(20),
                 child: Column(
                   children: [
-                    // 🔹 SEARCH BAR
+                    // search bar
                     SizedBox(
                       height: 42,
                       child: Container(
@@ -206,7 +199,7 @@ class _PastelJobFinderWidgetState extends State<PastelJobFinderWidget> {
                     ),
                     const SizedBox(height: 12),
       
-                    // 🔹 FILTER DROPDOWN
+                    // filter dropdown
                     Container(
                       decoration: BoxDecoration(
                         color: AppColors.white,
@@ -229,7 +222,7 @@ class _PastelJobFinderWidgetState extends State<PastelJobFinderWidget> {
                     ),
                     const SizedBox(height: 18),
       
-                    // 🔹 TWO MAIN BUTTONS
+                    // two btns
                     Row(
                       children: [
                         Expanded(
@@ -271,7 +264,7 @@ class _PastelJobFinderWidgetState extends State<PastelJobFinderWidget> {
                     ),
                     const SizedBox(height: 20),
       
-                    // 🔹 JOB CARDS (ONLY 4)
+                    // job cards
                     Column(
                       children: filteredJobs.map((job) {
                         final isSaved = savedJobs.contains(job.id);

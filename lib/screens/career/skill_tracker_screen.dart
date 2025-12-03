@@ -41,7 +41,7 @@ class SkillTrackerScreen extends StatelessWidget {
       child: SafeArea(
         child: Column(
           children: [
-            // AppBar replacement
+
             const SkillTrackerAppBar(userName: 'Alex'),
             Expanded(
               child: SingleChildScrollView(
@@ -67,8 +67,7 @@ class SkillTrackerScreen extends StatelessWidget {
   }
 }
 
-// ==================== APP BAR ====================
-// ==================== APP BAR ====================
+//appbar
 class SkillTrackerAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String userName;
 
@@ -109,7 +108,7 @@ class SkillTrackerAppBar extends StatelessWidget implements PreferredSizeWidget 
   Size get preferredSize => const Size.fromHeight(60);
 }
 
-// ==================== SKILLS OVERVIEW ====================
+// skillls overview
 class SkillsOverview extends StatelessWidget {
   const SkillsOverview({super.key});
 
@@ -282,7 +281,7 @@ class CircularSkillCard extends StatelessWidget {
   }
 }
 
-// ==================== SKILLS IN PROGRESS ====================
+// skills in progress
 class SkillsInProgress extends StatelessWidget {
   const SkillsInProgress({super.key});
 
@@ -498,7 +497,7 @@ class SkillProgressCard extends StatelessWidget {
   }
 }
 
-// ==================== RECOMMENDED SKILLS ====================
+// recommended skills
 class RecommendedSkills extends StatelessWidget {
   const RecommendedSkills({super.key});
 

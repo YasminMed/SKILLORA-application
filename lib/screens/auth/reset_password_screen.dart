@@ -31,7 +31,7 @@ class ResetPasswordScreen extends StatelessWidget {
               children: [
                 const SizedBox(height: 10),
 
-                /// BACK BUTTON
+                //back btn
                 Row(
                   children: [
                     IconButton(
@@ -43,7 +43,7 @@ class ResetPasswordScreen extends StatelessWidget {
 
                 const SizedBox(height: 20),
 
-                /// TITLE
+                //title
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 24),
                 child: Column(
@@ -70,7 +70,7 @@ class ResetPasswordScreen extends StatelessWidget {
 
                 const SizedBox(height: 40),
 
-                /// WHITE CARD
+                //white card
                 Container(
                   height: 400,
                   padding: const EdgeInsets.all(24),
@@ -103,7 +103,8 @@ class ResetPasswordScreen extends StatelessWidget {
                       
                     ),
                     SizedBox(height: 25,),
-                      /// Password
+
+                      //password
                     Align(alignment:Alignment.centerLeft,child:  Text("Password", style: AppTextStyles.secondary. copyWith(color: Colors.black),)),
                     SizedBox(
                       height: 40,
@@ -125,7 +126,7 @@ class ResetPasswordScreen extends StatelessWidget {
                     ),
                     const SizedBox(height: 40),
 
-                      /// SAVE BUTTON
+                      //save btn
                       SizedBox(
                         width: double.infinity,
                         height: 50,
@@ -160,7 +161,7 @@ class ResetPasswordScreen extends StatelessWidget {
   }
 
 
-   /// INPUT DECORATION
+   /// input decoration
   InputDecoration _inputDecoration() {
   
     return InputDecoration(

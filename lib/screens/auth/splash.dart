@@ -39,14 +39,14 @@ class _SkilluraSplashScreenState extends State<SkilluraSplashScreen> {
   void initState() {
     super.initState();
 
-    // AUTO SLIDER — FIXED WITH SAFETY
+    // auto slider
     _timer = Timer.periodic(const Duration(seconds: 3), (timer) {
-      if (!mounted) return; // الشاشة مو موجودة
+      if (!mounted) return;// screen doesnt exist
 
       if (_controller.hasClients) {
         setState(() {
           _currentIndex =
-              (_currentIndex + 1) % splashData.length; // loop safely
+              (_currentIndex + 1) % splashData.length; // loop
         });
 
         _controller.animateToPage(
@@ -60,7 +60,7 @@ class _SkilluraSplashScreenState extends State<SkilluraSplashScreen> {
 
   @override
   void dispose() {
-    _timer.cancel(); // مهم جداً لإيقاف التايمر
+    _timer.cancel();// stop the timer
     _controller.dispose();
     super.dispose();
   }
@@ -74,7 +74,7 @@ class _SkilluraSplashScreenState extends State<SkilluraSplashScreen> {
           children: [
             const SizedBox(height: 10),
 
-            // ---------------- SLIDER ----------------
+            // SLIDER
             Expanded(
               flex: 6,
               child: PageView.builder(
@@ -121,7 +121,7 @@ class _SkilluraSplashScreenState extends State<SkilluraSplashScreen> {
 
             const SizedBox(height: 16),
 
-            // ---------------- DOTS ----------------
+            // DOTs
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: List.generate(
@@ -143,7 +143,7 @@ class _SkilluraSplashScreenState extends State<SkilluraSplashScreen> {
 
             const SizedBox(height: 30),
 
-            // ---------------- TEXT ----------------
+            //txt
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 30),
               child: Column(
@@ -173,7 +173,7 @@ class _SkilluraSplashScreenState extends State<SkilluraSplashScreen> {
 
             const SizedBox(height: 30),
 
-            // ---------------- BUTTON ----------------
+            // btn
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 40),
               child: ElevatedButton(

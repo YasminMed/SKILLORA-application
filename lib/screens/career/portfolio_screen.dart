@@ -6,9 +6,7 @@ void main() {
   runApp(const MyApp());
 }
 
-// ============================================================================
-// APPBAR WIDGET (Text only, small height, gradient)
-// ============================================================================
+//appbar
 class AppBarWidget extends StatelessWidget implements PreferredSizeWidget {
   const AppBarWidget({super.key, this.title = "Portfolio"});
 
@@ -46,9 +44,7 @@ class AppBarWidget extends StatelessWidget implements PreferredSizeWidget {
   Size get preferredSize => const Size.fromHeight(60);
 }
 
-// ============================================================================
-// MODELS
-// ============================================================================
+//models
 class Project {
   final String id;
   final String title;
@@ -93,9 +89,7 @@ class Achievement {
   });
 }
 
-// ============================================================================
-// PORTFOLIO SCREEN
-// ============================================================================
+//protofolio screen
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
@@ -182,10 +176,9 @@ class _PortfolioScreenState extends State<PortfolioScreen> {
         color: const Color(0xFFF5F5E8),
         child: Column(
           children: [
-            // 🔹 REPLACED APPBAR
             const AppBarWidget(title: "My Portfolio"),
 
-            // Scrollable Content
+            // content
             Expanded(
               child: SingleChildScrollView(
                 padding: const EdgeInsets.only(bottom: 20),

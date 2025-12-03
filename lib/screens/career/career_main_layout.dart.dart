@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-
-// ================== IMPORT CAREER SCREENS ==================
 import 'package:skillora/screens/career/career_dashboard_screen.dart';
 import 'package:skillora/screens/career/job_finder_screen.dart';
 import 'package:skillora/screens/career/portfolio_screen.dart';
@@ -9,8 +7,8 @@ import 'package:skillora/screens/career/career_roadmap_screen.dart';
 import 'package:skillora/screens/career/careert_bottom_nav_bar.dart';
 
 
-// ================== IMPORT NAV BAR ==================
-// 
+//import navbar
+
 class CareerMainLayout extends StatefulWidget {
   const CareerMainLayout({super.key});
 

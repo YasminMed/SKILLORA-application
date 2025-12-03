@@ -19,7 +19,7 @@ class SignUpScreen extends StatelessWidget {
             children: [
               const SizedBox(height: 10),
 
-              // BACK BUTTON
+              // back btn
               IconButton(
                 icon: const Icon(Icons.arrow_back_ios, color: Colors.black87),
                 onPressed: () => Navigator.pop(context),
@@ -27,7 +27,7 @@ class SignUpScreen extends StatelessWidget {
 
               const SizedBox(height: 10),
 
-              /// TITLE
+              /// title
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 24),
                 child: Column(
@@ -53,7 +53,7 @@ class SignUpScreen extends StatelessWidget {
               ),
               const SizedBox(height: 30),
 
-              // WHITE CARD
+              // white card
               Container(
                 height: 440,
                 padding: const EdgeInsets.symmetric(horizontal: 22, vertical: 30),
@@ -77,7 +77,7 @@ class SignUpScreen extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    /// Email
+                    //email
                     Text("Email", style: AppTextStyles.secondary.copyWith(color: Colors.black)),
                     SizedBox(
                       height: 40,
@@ -98,7 +98,7 @@ class SignUpScreen extends StatelessWidget {
                     ),
                     const SizedBox(height: 22),
 
-                    /// Confirm Password
+                    //confirm pass
                     Text("Confirm Password", style: AppTextStyles.secondary.copyWith(color: Colors.black)),
                     SizedBox(
                       height: 40,
@@ -110,7 +110,7 @@ class SignUpScreen extends StatelessWidget {
 
                     const SizedBox(height: 60),
 
-                    /// CREATE ACCOUNT BUTTON
+                    //create acc btn
                     SizedBox(
                       width: double.infinity,
                       height: 40,
@@ -134,7 +134,7 @@ class SignUpScreen extends StatelessWidget {
 
                     const SizedBox(height: 25),
 
-                    /// LOGIN LINK
+                    //login link
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
@@ -175,7 +175,7 @@ class SignUpScreen extends StatelessWidget {
     );
   }
 
-  /// POPUP SUCCESS WINDOW WITH LOTTIE
+  /// popup sucess window
   void _showSuccessPopup(BuildContext context) {
     showDialog(
       context: context,
@@ -192,7 +192,7 @@ class SignUpScreen extends StatelessWidget {
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                // LOTTIE SUCCESS CHECK
+                // lottie success 
                 SizedBox(
                   height: 120,
                   width: 120,
@@ -201,7 +201,7 @@ class SignUpScreen extends StatelessWidget {
 
                 const SizedBox(height: 10),
 
-                // TEXT
+                // txt
                 const Text(
                   "New account created successfully",
                   textAlign: TextAlign.center,
@@ -218,7 +218,7 @@ class SignUpScreen extends StatelessWidget {
       },
     );
 
-    // WAIT 2 SECONDS THEN GO TO LOGIN SCREEN
+    // delay then login screen
     Future.delayed(const Duration(seconds: 4), () {
       Navigator.pop(context); // close popup
       Navigator.pushReplacement(
@@ -228,7 +228,7 @@ class SignUpScreen extends StatelessWidget {
     });
   }
 
-  /// INPUT FIELD DECORATION
+  /// input decor
   InputDecoration _inputDecoration() {
     return InputDecoration(
       filled: true,

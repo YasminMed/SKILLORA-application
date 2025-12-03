@@ -69,9 +69,7 @@ class Goal {
   }
 }
 
-// =====================
-// Main Screen
-// =====================
+//main screen
 class StudentGoalScreen extends StatefulWidget {
   const StudentGoalScreen({Key? key}) : super(key: key);
 
@@ -158,7 +156,7 @@ class _StudentGoalScreenState extends State<StudentGoalScreen> {
           ),
         ),
 
-        // Floating Add Goal Button
+        // flot add btn
         Positioned(
           bottom: 20,
           right: 20,

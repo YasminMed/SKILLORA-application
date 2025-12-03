@@ -2,9 +2,7 @@ import 'package:flutter/material.dart';
 import '../../constants/app_colors.dart';
 import '../../constants/app_text_styles.dart';
 
-
 enum NoteCategory { computer_science, mathematics, project }
-
 
 class NoteAttachment {
   final String id;
@@ -20,14 +18,11 @@ class NoteAttachment {
   });
 }
 
-
 class Note {
   final String id;
   final String title;
   final String content;
   final NoteCategory category;
-  final DateTime createdAt;
-  final DateTime updatedAt;
   final List<String> tags;
   final List<NoteAttachment> attachments;
   final bool isPinned;
@@ -38,8 +33,6 @@ class Note {
     required this.title,
     required this.content,
     required this.category,
-    required this.createdAt,
-    required this.updatedAt,
     required this.tags,
     required this.attachments,
     this.isPinned = false,
@@ -79,38 +72,7 @@ class Note {
         return Icons.folder;
     }
   }
-
-  String get formattedDate {
-    const months = [
-      'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
-      'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'
-    ];
-    return '${months[updatedAt.month - 1]} ${updatedAt.day}, ${updatedAt.year}';
-  }
-
-  String get timeAgo {
-    final now = DateTime.now();
-    final difference = now.difference(updatedAt);
-
-    if (difference.inDays == 0) {
-      if (difference.inHours == 0) {
-        if (difference.inMinutes == 0) return 'Just now';
-        return '${difference.inMinutes}m ago';
-      }
-      return '${difference.inHours}h ago';
-    } else if (difference.inDays == 1) {
-      return 'Yesterday';
-    } else if (difference.inDays < 7) {
-      return '${difference.inDays}d ago';
-    } else if (difference.inDays < 30) {
-      return '${(difference.inDays / 7).floor()}w ago';
-    } else {
-      return formattedDate;
-    }
-  }
 }
-
-
 
 class NotesWidget extends StatefulWidget {
   const NotesWidget({Key? key}) : super(key: key);
@@ -131,8 +93,6 @@ class _NotesWidgetState extends State<NotesWidget> {
       title: 'Data Structures Final Review',
       content: 'Key concepts: Binary Search Trees, Hash Tables, Graph Algorithms.',
       category: NoteCategory.computer_science,
-      createdAt: DateTime.now().subtract(const Duration(hours: 2)),
-      updatedAt: DateTime.now().subtract(const Duration(hours: 2)),
       tags: ['algorithms', 'exam'],
       attachments: [
         NoteAttachment(
@@ -148,8 +108,6 @@ class _NotesWidgetState extends State<NotesWidget> {
       title: 'Linear Algebra - Matrix Operations',
       content: 'Matrix multiplication rules, determinants, eigenvalues and eigenvectors.',
       category: NoteCategory.mathematics,
-      createdAt: DateTime.now().subtract(const Duration(days: 1)),
-      updatedAt: DateTime.now().subtract(const Duration(days: 1)),
       tags: ['math', 'homework'],
       attachments: [],
       isPinned: true,
@@ -159,8 +117,6 @@ class _NotesWidgetState extends State<NotesWidget> {
       title: 'E-commerce Project Tasks',
       content: 'Todo: Complete payment gateway integration, add product search filters.',
       category: NoteCategory.project,
-      createdAt: DateTime.now().subtract(const Duration(days: 2)),
-      updatedAt: DateTime.now().subtract(const Duration(hours: 5)),
       tags: ['project', 'development'],
       attachments: [],
     ),
@@ -184,7 +140,7 @@ class _NotesWidgetState extends State<NotesWidget> {
     filtered.sort((a, b) {
       if (a.isPinned && !b.isPinned) return -1;
       if (!a.isPinned && b.isPinned) return 1;
-      return b.updatedAt.compareTo(a.updatedAt);
+      return 0;
     });
 
     return filtered;
@@ -226,62 +182,55 @@ class _NotesWidgetState extends State<NotesWidget> {
     );
   }
 
-
- Widget _buildAppBar(BuildContext context) {
-  return SafeArea(
-    child: Container(
-      decoration: BoxDecoration(
-        gradient: const LinearGradient(
-          colors: [AppColors.primary, AppColors.accent],
-        ),
-        boxShadow: [
-          BoxShadow(
-            color: AppColors.primary.withOpacity(0.2),
-            blurRadius: 20,
-            offset: const Offset(0, 4),
+  Widget _buildAppBar(BuildContext context) {
+    return SafeArea(
+      child: Container(
+        decoration: BoxDecoration(
+          gradient: const LinearGradient(
+            colors: [AppColors.primary, AppColors.accent],
           ),
-        ],
-      ),
-      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 14),
-    
-      child: Stack(
-        alignment: Alignment.center,
-        children: [
-          // ------- CENTERED TITLE -------
-          Text(
-            'My Notes',
-            style: AppTextStyles.h2.copyWith(
-              color: AppColors.white,
-              fontSize: 20,
+          boxShadow: [
+            BoxShadow(
+              color: AppColors.primary.withOpacity(0.2),
+              blurRadius: 20,
+              offset: const Offset(0, 4),
             ),
-          ),
-    
-          // ------- RIGHT ACTION BUTTON -------
-          Align(
-            alignment: Alignment.centerRight,
-            child: GestureDetector(
-              onTap: () => setState(() => isGridView = !isGridView),
-              child: Container(
-                padding: const EdgeInsets.all(8),
-                decoration: BoxDecoration(
-                  color: AppColors.white.withOpacity(0.2),
-                  borderRadius: BorderRadius.circular(12),
-                ),
-                child: Icon(
-                  isGridView ? Icons.view_list : Icons.grid_view,
-                  color: AppColors.white,
-                  size: 20,
+          ],
+        ),
+        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 14),
+        child: Stack(
+          alignment: Alignment.center,
+          children: [
+            Text(
+              'My Notes',
+              style: AppTextStyles.h2.copyWith(
+                color: AppColors.white,
+                fontSize: 20,
+              ),
+            ),
+            Align(
+              alignment: Alignment.centerRight,
+              child: GestureDetector(
+                onTap: () => setState(() => isGridView = !isGridView),
+                child: Container(
+                  padding: const EdgeInsets.all(8),
+                  decoration: BoxDecoration(
+                    color: AppColors.white.withOpacity(0.2),
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  child: Icon(
+                    isGridView ? Icons.view_list : Icons.grid_view,
+                    color: AppColors.white,
+                    size: 20,
+                  ),
                 ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
-    ),
-  );
-}
-
-
+    );
+  }
 
   Widget _buildStatsCards(int total, int pinned, int withFiles) {
     return Container(
@@ -331,8 +280,6 @@ class _NotesWidgetState extends State<NotesWidget> {
       ],
     );
   }
-
-
 
   Widget _buildFilterChips() {
     final categories = ['All', 'Computer Science', 'Mathematics', 'Project'];
@@ -386,7 +333,6 @@ class _NotesWidgetState extends State<NotesWidget> {
     );
   }
 
-
   Widget _buildNotesList() {
     return isGridView
         ? GridView.builder(
@@ -406,7 +352,6 @@ class _NotesWidgetState extends State<NotesWidget> {
             itemBuilder: (context, index) => _buildNoteCardList(filteredNotes[index]),
           );
   }
-
 
   Widget _buildNoteCardList(Note note) {
     return Container(
@@ -488,7 +433,6 @@ class _NotesWidgetState extends State<NotesWidget> {
     );
   }
 
-
   Widget _buildNoteCardGrid(Note note) {
     return Container(
       padding: const EdgeInsets.all(14),
@@ -522,8 +466,7 @@ class _NotesWidgetState extends State<NotesWidget> {
                 ),
                 child: Icon(note.categoryIcon, color: note.categoryColor, size: 20),
               ),
-              if (note.isPinned)
-                Icon(Icons.push_pin, size: 16, color: note.categoryColor),
+              if (note.isPinned) Icon(Icons.push_pin, size: 16, color: note.categoryColor),
             ],
           ),
           const SizedBox(height: 10),

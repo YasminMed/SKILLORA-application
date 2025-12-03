@@ -32,7 +32,7 @@ class ForgotPasswordEmailScreen extends StatelessWidget {
               children: [
                 const SizedBox(height: 10),
 
-                /// BACK BUTTON
+                // BACK btn
                 Row(
                   children: [
                     IconButton(
@@ -44,7 +44,7 @@ class ForgotPasswordEmailScreen extends StatelessWidget {
 
                 const SizedBox(height: 20),
 
-                /// TITLE
+                // title
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 24),
                 child: Column(
@@ -71,7 +71,7 @@ class ForgotPasswordEmailScreen extends StatelessWidget {
 
                 const SizedBox(height: 40),
 
-                /// WHITE CARD
+                // white card
                 Container(
                   height: 400,
                   padding: const EdgeInsets.all(24),
@@ -107,7 +107,7 @@ class ForgotPasswordEmailScreen extends StatelessWidget {
 
 
 
-                      /// Email
+                      //email
                     Align( alignment:Alignment.topLeft, child:  Text("Email", style: AppTextStyles.secondary. copyWith(color: Colors.black),)),
                     SizedBox(
                       height: 40,
@@ -127,7 +127,7 @@ class ForgotPasswordEmailScreen extends StatelessWidget {
 
 
 
-                      /// Continue Button
+                      //continue btn
                     SizedBox(
                       width: double.infinity,
                       height: 50,
@@ -153,7 +153,7 @@ class ForgotPasswordEmailScreen extends StatelessWidget {
                     ),
                     SizedBox(height: 20,),
 
-                     /// resend
+                     //resend
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [

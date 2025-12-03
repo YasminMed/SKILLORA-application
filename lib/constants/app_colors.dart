@@ -11,7 +11,7 @@ class AppColors {
   static const Color limeGreen = Color(0xFFD4E09B);
   static const Color darkBrown = Color(0xFF6F5E53);
 
-  // Neutrals (optional)
+  // Neutralss
   static const Color white = Colors.white;
   static const Color black = Colors.black;
   static const Color grey = Colors.grey;
