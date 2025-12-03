@@ -85,7 +85,7 @@ class StudyProfileWidget extends StatelessWidget {
                         ),
                         const SizedBox(height: 12),
                         Text(
-                          "Student Name",
+                          "SmSm",
                           style: TextStyle(
                             color: AppColors.black.withOpacity(0.87),
                             fontSize: 20,
@@ -94,7 +94,7 @@ class StudyProfileWidget extends StatelessWidget {
                         ),
                         const SizedBox(height: 4),
                         const Text(
-                          "student@example.com",
+                          "smsm@example.com",
                           style: TextStyle(
                             color: AppColors.grey,
                             fontSize: 14,
