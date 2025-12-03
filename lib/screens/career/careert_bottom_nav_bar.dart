@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class AppColors {
-  static const Color primary = Color(0xFFCBDFBD); // Soft Green
+  static const Color primary = Color.fromARGB(255, 153, 214, 109); // Soft Green
   static const Color secondary = Color(0xFFFF6B6B); // Coral Red
   static const Color softGreen = Color(0xFFCBDFBD); // Soft Green
   static const Color lime = Color(0xFFD4E09B); // Lime Green
@@ -91,7 +91,7 @@ class CareerBottomNavBar extends StatelessWidget {
                         width: isActive ? 50 : 36,
                         height: isActive ? 50 : 36,
                         decoration: BoxDecoration(
-                          color: isActive ? AppColors.secondary : Colors.transparent,
+                          color: isActive ? AppColors.primary : Colors.transparent,
                           shape: BoxShape.circle,
                         ),
                         child: Icon(

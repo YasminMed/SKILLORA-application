@@ -60,86 +60,116 @@ class _SalaryEstimationWidgetState extends State<SalaryEstimationWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return Material(
-      child: SingleChildScrollView(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          children: [
-            _buildInputField('Years of Experience', _experienceController, '0'),
-            _buildInputField('Skills (comma separated)', _skillsController, 'Flutter, Python'),
-            _buildInputField('Education Level (1-5)', _educationController, '3'),
-            _buildInputField('Certifications (comma separated)', _certificationsController, 'Google, AWS'),
-            _buildInputField('Number of Projects', _projectsController, '0'),
-
-            const SizedBox(height: 20),
-
-            SizedBox(
-              width: double.infinity,
-              child: ElevatedButton(
-                onPressed: _calculateSalary,
-                style: ElevatedButton.styleFrom(
-                  padding: const EdgeInsets.symmetric(vertical: 16),
-                  backgroundColor: const Color.fromARGB(255, 169, 213, 118),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(14),
-                  ),
-                  elevation: 4,
-                ),
-                child: const Text(
-                  'Calculate Salary',
-                  style: TextStyle(
-                    color: Colors.brown,
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ),
-            ),
-
-            const SizedBox(height: 30),
-
-            if (_estimatedSalary != null)
+    return SafeArea(
+      child: Material(
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              // Custom AppBar
               Container(
-                width: double.infinity,
-                padding: const EdgeInsets.all(24),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(20),
-                  gradient: const LinearGradient(
+                height: 60,
+                decoration: const BoxDecoration(
+                  gradient: LinearGradient(
                     colors: [Color(0xFFCBDFBD), Color(0xFFD4E09B)],
                     begin: Alignment.topLeft,
                     end: Alignment.bottomRight,
                   ),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.brown.withOpacity(0.2),
-                      blurRadius: 12,
-                      offset: const Offset(0, 6),
-                    ),
-                  ],
                 ),
-                child: Column(
+                child: Row(
                   children: [
-                    const Text(
-                      'Estimated Salary',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 22,
-                        fontWeight: FontWeight.bold,
-                      ),
+                    IconButton(
+                      icon: const Icon(Icons.arrow_back, color: AppColors.darkBrown),
+                      onPressed: () => Navigator.pop(context),
                     ),
-                    const SizedBox(height: 12),
                     Text(
-                      '\$${_estimatedSalary!.toStringAsFixed(2)}',
-                      style: const TextStyle(
-                        color: Colors.brown,
-                        fontSize: 36,
-                        fontWeight: FontWeight.bold,
-                      ),
+                      'Salary Estimator',
+                      style: AppTextStyles.h2.copyWith(fontSize: 20, color: AppColors.darkBrown),
                     ),
                   ],
                 ),
               ),
-          ],
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 12),
+                child: Column(children: [
+                _buildInputField('Years of Experience', _experienceController, '0'),
+                _buildInputField('Skills (comma separated)', _skillsController, 'Flutter, Python'),
+                _buildInputField('Education Level (1-5)', _educationController, '3'),
+                _buildInputField('Certifications (comma separated)', _certificationsController, 'Google, AWS'),
+                _buildInputField('Number of Projects', _projectsController, '0'),
+                      
+                const SizedBox(height: 20),
+                      
+                SizedBox(
+                  width: double.infinity,
+                  child: ElevatedButton(
+                    onPressed: _calculateSalary,
+                    style: ElevatedButton.styleFrom(
+                      padding: const EdgeInsets.symmetric(vertical: 16),
+                      backgroundColor: const Color.fromARGB(255, 169, 213, 118),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(14),
+                      ),
+                      elevation: 4,
+                    ),
+                    child: const Text(
+                      'Calculate Salary',
+                      style: TextStyle(
+                        color: Colors.brown,
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                ),
+                      
+                const SizedBox(height: 30),
+                      
+                if (_estimatedSalary != null)
+                  Container(
+                    width: double.infinity,
+                    padding: const EdgeInsets.all(24),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(20),
+                      gradient: const LinearGradient(
+                        colors: [Color(0xFFCBDFBD), Color(0xFFD4E09B)],
+                        begin: Alignment.topLeft,
+                        end: Alignment.bottomRight,
+                      ),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.brown.withOpacity(0.2),
+                          blurRadius: 12,
+                          offset: const Offset(0, 6),
+                        ),
+                      ],
+                    ),
+                    child: Column(
+                      children: [
+                        const Text(
+                          'Estimated Salary',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 22,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        const SizedBox(height: 12),
+                        Text(
+                          '\$${_estimatedSalary!.toStringAsFixed(2)}',
+                          style: const TextStyle(
+                            color: Colors.brown,
+                            fontSize: 36,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],),
+              )
+              
+            ],
+          ),
         ),
       ),
     );

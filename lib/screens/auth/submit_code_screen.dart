@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../constants/app_colors.dart';
 import '../../constants/app_text_styles.dart';
-import 'reset_password_screen.dart';
 
 class SubmitCodeScreen extends StatelessWidget {
   const SubmitCodeScreen({super.key});
@@ -128,9 +127,9 @@ class SubmitCodeScreen extends StatelessWidget {
                             elevation: 0,
                           ),
                           onPressed: () {
-                            Navigator.push(
+                            Navigator.pushNamed(
                               context,
-                              MaterialPageRoute(builder: (_) => const ResetPasswordScreen()),
+                              '/reset_pass',
                             );
                           },
                           child: Text("Verify Code", style: AppTextStyles.button),

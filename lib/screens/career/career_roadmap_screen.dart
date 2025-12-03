@@ -32,31 +32,28 @@ class AppBarWidget extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: preferredSize.height,
-      padding: const EdgeInsets.symmetric(horizontal: 12),
-      decoration: const BoxDecoration(
-        gradient: LinearGradient(
-          colors: [Color(0xFFD4E09B), Color(0xFFCBDFBD)], // Linear gradient
-          begin: Alignment.topLeft,
-          end: Alignment.bottomRight,
+    return SafeArea(
+      child: Container(
+        height: preferredSize.height,
+        width: double.infinity,
+        padding: const EdgeInsets.symmetric(horizontal: 12),
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+            colors: [Color(0xFFD4E09B), Color(0xFFCBDFBD)], // Linear gradient
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+          ),
         ),
-      ),
-      child: Row(
-        children: [
-          IconButton(
-            onPressed: () => Navigator.pop(context),
-            icon: const Icon(Icons.arrow_back, color: AppColors.darkBrown),
-          ),
-          Text(
-            title,
-            style: const TextStyle(
-              color: AppColors.darkBrown, // Brown text
-              fontSize: 22,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-        ],
+        child: Center(
+          child: Text(
+                title,
+                style: const TextStyle(
+                  color: AppColors.darkBrown, // Brown text
+                  fontSize: 22,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+        ),
       ),
     );
   }
@@ -296,7 +293,7 @@ class CareerRoadmapScreenWidget extends StatelessWidget {
           shadowColor: Colors.transparent,
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
         ),
-        child: Text("Customize Your Roadmap", style: AppTextStyles.button?.copyWith(color: AppColors.darkBrown)),
+        child: Text("Customize Your Roadmap", style: AppTextStyles.button.copyWith(color: AppColors.darkBrown)),
       ),
     );
   }
@@ -403,7 +400,7 @@ class _CustomizeRoadmapSheetState extends State<CustomizeRoadmapSheet> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text("Career Goal", style: AppTextStyles.label?.copyWith(fontSize: 16, fontWeight: FontWeight.w600)),
+                  Text("Career Goal", style: AppTextStyles.label.copyWith(fontSize: 16, fontWeight: FontWeight.w600)),
                   const SizedBox(height: 8),
                   TextField(
                     controller: _careerGoalController,
@@ -413,7 +410,7 @@ class _CustomizeRoadmapSheetState extends State<CustomizeRoadmapSheet> {
                     ),
                   ),
                   const SizedBox(height: 16),
-                  Text("Experience Level", style: AppTextStyles.label?.copyWith(fontSize: 16, fontWeight: FontWeight.w600)),
+                  Text("Experience Level", style: AppTextStyles.label.copyWith(fontSize: 16, fontWeight: FontWeight.w600)),
                   const SizedBox(height: 8),
                   DropdownButtonFormField<String>(
                     value: _selectedExperience,
@@ -422,7 +419,7 @@ class _CustomizeRoadmapSheetState extends State<CustomizeRoadmapSheet> {
                     decoration: InputDecoration(border: OutlineInputBorder(borderRadius: BorderRadius.circular(12))),
                   ),
                   const SizedBox(height: 16),
-                  Text("Field", style: AppTextStyles.label?.copyWith(fontSize: 16, fontWeight: FontWeight.w600)),
+                  Text("Field", style: AppTextStyles.label.copyWith(fontSize: 16, fontWeight: FontWeight.w600)),
                   const SizedBox(height: 8),
                   DropdownButtonFormField<String>(
                     value: _selectedField,
@@ -445,7 +442,7 @@ class _CustomizeRoadmapSheetState extends State<CustomizeRoadmapSheet> {
                         shadowColor: Colors.transparent,
                         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
                       ),
-                      child: Text("Save Changes", style: AppTextStyles.button?.copyWith(color: AppColors.darkBrown)),
+                      child: Text("Save Changes", style: AppTextStyles.button.copyWith(color: AppColors.darkBrown)),
                     ),
                   ),
                   const SizedBox(height: 20),

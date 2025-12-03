@@ -137,7 +137,12 @@ class ResetPasswordScreen extends StatelessWidget {
                             ),
                             elevation: 0,
                           ),
-                          onPressed: () {},
+                          onPressed: () {
+                            Navigator.pushNamed(
+                              context,
+                              '/modes',
+                            );
+                          },
                           child: Text("Save Password", style: AppTextStyles.button),
                         ),
                       ),
@@ -154,17 +159,6 @@ class ResetPasswordScreen extends StatelessWidget {
     );
   }
 
-  InputDecoration _input(String label) {
-    return InputDecoration(
-
-      filled: true,
-      fillColor: Colors.grey.shade200,
-      border: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(12),
-        borderSide: BorderSide.none,
-      ),
-    );
-  }
 
    /// INPUT DECORATION
   InputDecoration _inputDecoration() {

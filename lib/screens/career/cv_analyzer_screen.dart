@@ -36,42 +36,47 @@ class _CVAnalyzerWidgetState extends State<CVAnalyzerWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        // Custom AppBar
-        Container(
-          height: 60,
-          padding: const EdgeInsets.symmetric(horizontal: 12),
-          decoration: const BoxDecoration(
-            gradient: LinearGradient(
-              colors: [Color(0xFFCBDFBD), Color(0xFFD4E09B)],
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight,
-            ),
-          ),
-          child: Row(
-            children: [
-              IconButton(
-                icon: const Icon(Icons.arrow_back, color: AppColors.darkBrown),
-                onPressed: () => Navigator.pop(context),
+    return SafeArea(
+      child: Container(
+        color: Colors.white,
+        child: Column(
+          children: [
+            // Custom AppBar
+            Container(
+              height: 60,
+              padding: const EdgeInsets.symmetric(horizontal: 12),
+              decoration: const BoxDecoration(
+                gradient: LinearGradient(
+                  colors: [Color(0xFFCBDFBD), Color(0xFFD4E09B)],
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                ),
               ),
-              Text(
-                'CV Analyzer',
-                style: AppTextStyles.h2.copyWith(fontSize: 20, color: AppColors.darkBrown),
+              child: Row(
+                children: [
+                  IconButton(
+                    icon: const Icon(Icons.arrow_back, color: AppColors.darkBrown),
+                    onPressed: () => Navigator.pop(context),
+                  ),
+                  Text(
+                    'CV Analyzer',
+                    style: AppTextStyles.h2.copyWith(fontSize: 20, color: AppColors.darkBrown),
+                  ),
+                ],
               ),
-            ],
-          ),
-        ),
-        Expanded(
-          child: SingleChildScrollView(
-            child: Container(
-              constraints: const BoxConstraints(maxWidth: 430),
-              margin: const EdgeInsets.symmetric(horizontal: 16),
-              child: isUploaded ? _buildAnalysisView() : _buildUploadView(),
             ),
-          ),
+            Expanded(
+              child: SingleChildScrollView(
+                child: Container(
+                  constraints: const BoxConstraints(maxWidth: 430),
+                  margin: const EdgeInsets.symmetric(horizontal: 16),
+                  child: isUploaded ? _buildAnalysisView() : _buildUploadView(),
+                ),
+              ),
+            ),
+          ],
         ),
-      ],
+      ),
     );
   }
 

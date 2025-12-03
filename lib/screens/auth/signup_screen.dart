@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
-import 'package:skillora/screens/modes.dart';
 import '../../constants/app_colors.dart';
 import '../../constants/app_text_styles.dart';
 import 'login_screen.dart';
@@ -148,10 +147,10 @@ class SignUpScreen extends StatelessWidget {
                         ),
                         GestureDetector(
                           onTap: () {
-                            Navigator.push(
+                            Navigator.pushNamed(
                               context,
-                              MaterialPageRoute(builder: (_) => const LoginScreen()),
-                            );
+                              '/login');
+                  
                           },
                           child: Text(
                             "Log in",

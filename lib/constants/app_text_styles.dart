@@ -5,7 +5,7 @@ import 'app_colors.dart';
 
 class AppTextStyles {
   
-  // 🔥 Headings (H1-H3) | Semibold (600)
+  // Headings (H1-H3) | Semibold
   static final TextStyle h1 = GoogleFonts.inter(
     fontSize: 30,
     fontWeight: FontWeight.w600,
@@ -14,13 +14,13 @@ class AppTextStyles {
   );
 
   static final TextStyle h2 = GoogleFonts.inter(
-    fontSize: 28,
-    fontWeight: FontWeight.w600,
+    fontSize: 18,
+    fontWeight: FontWeight.w500,
     color: AppColors.darkBrown,
-      decoration: TextDecoration.none,
+    decoration: TextDecoration.none,
   );
 
-  // 📝 Body Text (400)
+  // Body Text (400)
   static final TextStyle body = GoogleFonts.inter(
     fontSize: 16,
     fontWeight: FontWeight.w400,
@@ -28,7 +28,7 @@ class AppTextStyles {
       decoration: TextDecoration.none,
   );
 
-  // 🔘 Labels & Buttons (500)
+  // Labels & Buttons (500)
   static final TextStyle button = GoogleFonts.inter(
     fontSize: 16,
     fontWeight: FontWeight.w500,
@@ -43,7 +43,7 @@ class AppTextStyles {
       decoration: TextDecoration.none,
   );
 
-  // 🧸 Secondary Text (400) - using darkBrown color
+  // Secondary Text (400) - using darkBrown color
   static final TextStyle secondary = GoogleFonts.inter(
     fontSize: 14,
     fontWeight: FontWeight.w400,

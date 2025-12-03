@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../constants/app_colors.dart';
 import '../../constants/app_text_styles.dart';
-import 'submit_code_screen.dart';
 
 class ForgotPasswordEmailScreen extends StatelessWidget {
   const ForgotPasswordEmailScreen({super.key});
@@ -141,9 +140,9 @@ class ForgotPasswordEmailScreen extends StatelessWidget {
                           elevation: 0,
                         ),
                         onPressed: () {
-                          Navigator.push(
+                          Navigator.pushNamed(
                             context,
-                            MaterialPageRoute(builder: (_) => const SubmitCodeScreen()),
+                            '/code_submit'
                           );
                         },
                         child: Text(

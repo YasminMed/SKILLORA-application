@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:skillora/constants/app_colors.dart';
-import 'package:skillora/screens/auth/signup_screen.dart';
 
 class SkilluraSplashScreen extends StatefulWidget {
   const SkilluraSplashScreen({super.key});
@@ -187,9 +186,9 @@ class _SkilluraSplashScreenState extends State<SkilluraSplashScreen> {
                   ),
                 ),
                 onPressed: () {
-                  Navigator.pushReplacement(
+                  Navigator.pushReplacementNamed(
                     context,
-                    MaterialPageRoute(builder: (_) => SignUpScreen()),
+                    '/signup',
                   );
                 },
                 child: const Text(

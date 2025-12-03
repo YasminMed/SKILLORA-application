@@ -1,10 +1,6 @@
 import 'package:flutter/material.dart';
 import 'dart:math' as math;
 import 'package:skillora/constants/app_colors.dart';
-import 'package:skillora/screens/study/study_profile_screen.dart';
-
-
-
 class StudentDashboard extends StatelessWidget {
   const StudentDashboard({Key? key}) : super(key: key);
 
@@ -119,44 +115,41 @@ class AppBarWidget extends StatelessWidget {
               ),
               const SizedBox(width: 10),
              GestureDetector(
-  onTap: () {
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) => const StudyProfileWidget(),
-      ),
-    );
-  },
-  child: Container(
-    width: 36,
-    height: 36,
-    decoration: BoxDecoration(
-      color: AppColors.white,
-      shape: BoxShape.circle,
-      border: Border.all(
-        color: AppColors.white.withOpacity(0.3),
-        width: 2,
-      ),
-      boxShadow: [
-        BoxShadow(
-          color: AppColors.black.withOpacity(0.1),
-          blurRadius: 8,
-        ),
-      ],
-    ),
-    child: Center(
-      child: Text(
-        userName[0].toUpperCase(),
-        style: const TextStyle(
-          color: AppColors.primary,
-          fontSize: 16,
-          fontWeight: FontWeight.w600,
-        ),
-      ),
-    ),
-  ),
-),
-
+                onTap: () {
+                  Navigator.pushNamed(
+                    context,
+                    '/student_profile',
+                  );
+                },
+                child: Container(
+                  width: 36,
+                  height: 36,
+                  decoration: BoxDecoration(
+                    color: AppColors.white,
+                    shape: BoxShape.circle,
+                    border: Border.all(
+                      color: AppColors.white.withOpacity(0.3),
+                      width: 2,
+                    ),
+                    boxShadow: [
+                      BoxShadow(
+                        color: AppColors.black.withOpacity(0.1),
+                        blurRadius: 8,
+                      ),
+                    ],
+                  ),
+                  child: Center(
+                    child: Text(
+                      userName[0].toUpperCase(),
+                      style: const TextStyle(
+                        color: AppColors.primary,
+                        fontSize: 16,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
             ],
           ),
         ],

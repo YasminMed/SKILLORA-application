@@ -6,6 +6,49 @@ void main() {
   runApp(const MyApp());
 }
 
+// ============================================================================
+// APPBAR WIDGET (Text only, small height, gradient)
+// ============================================================================
+class AppBarWidget extends StatelessWidget implements PreferredSizeWidget {
+  const AppBarWidget({super.key, this.title = "Portfolio"});
+
+  final String title;
+
+  @override
+  Widget build(BuildContext context) {
+    return SafeArea(
+      child: Container(
+        height: preferredSize.height,
+        width: double.infinity,
+        padding: const EdgeInsets.symmetric(horizontal: 12),
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+            colors: [Color(0xFFD4E09B), Color(0xFFCBDFBD)],
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+          ),
+        ),
+        child: Center(
+          child: Text(
+            title,
+            style: const TextStyle(
+              color: AppColors.darkBrown,
+              fontSize: 22,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  @override
+  Size get preferredSize => const Size.fromHeight(60);
+}
+
+// ============================================================================
+// MODELS
+// ============================================================================
 class Project {
   final String id;
   final String title;
@@ -50,6 +93,9 @@ class Achievement {
   });
 }
 
+// ============================================================================
+// PORTFOLIO SCREEN
+// ============================================================================
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
@@ -131,194 +177,146 @@ class _PortfolioScreenState extends State<PortfolioScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: const Color(0xFFF5F5E8),
-      child: Column(
-        children: [
-          // Custom AppBar with linear gradient
-          Container(
-            decoration: BoxDecoration(
-              gradient: const LinearGradient(
-                begin: Alignment.topLeft,
-                end: Alignment.bottomRight,
-                colors: [
-                  Color(0xFFCBDFBD),
-                  Color(0xFFD4E09B),
-                ],
-              ),
-            ),
-            padding: const EdgeInsets.only(left: 16, right: 16, top: 50, bottom: 20),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Row(
+    return SafeArea(
+      child: Container(
+        color: const Color(0xFFF5F5E8),
+        child: Column(
+          children: [
+            // 🔹 REPLACED APPBAR
+            const AppBarWidget(title: "My Portfolio"),
+
+            // Scrollable Content
+            Expanded(
+              child: SingleChildScrollView(
+                padding: const EdgeInsets.only(bottom: 20),
+                child: Column(
                   children: [
-                    IconButton(
-                      onPressed: () {},
-                      icon: const Icon(Icons.arrow_back, color: AppColors.white, size: 24),
-                      padding: EdgeInsets.zero,
-                      constraints: const BoxConstraints(),
-                    ),
-                    const SizedBox(width: 12),
-                    const Text(
-                      'My Portfolio',
-                      style: TextStyle(
-                        color: Color.fromARGB(255, 111, 94, 83),
-                        fontSize: 24,
-                        fontWeight: FontWeight.w700,
-                        fontFamily: 'Inter',
+                    // Profile Card
+                    Padding(
+                      padding: const EdgeInsets.only(left: 16, right: 16, top: 24, bottom: 16),
+                      child: Container(
+                        decoration: BoxDecoration(
+                          color: AppColors.white,
+                          borderRadius: BorderRadius.circular(24),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.black.withOpacity(0.08),
+                              blurRadius: 20,
+                              offset: const Offset(0, 4),
+                            ),
+                          ],
+                        ),
+                        padding: const EdgeInsets.all(20),
+                        child: Column(
+                          children: [
+                            Row(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                // Avatar
+                                Container(
+                                  width: 70,
+                                  height: 70,
+                                  decoration: BoxDecoration(
+                                    gradient: LinearGradient(
+                                      begin: Alignment.topLeft,
+                                      end: Alignment.bottomRight,
+                                      colors: [AppColors.softGreen, AppColors.accent],
+                                    ),
+                                    borderRadius: BorderRadius.circular(16),
+                                  ),
+                                  child: Center(
+                                    child: Text(
+                                      'JD',
+                                      style: AppTextStyles.body.copyWith(color: Colors.white),
+                                    ),
+                                  ),
+                                ),
+                                const SizedBox(width: 16),
+                                // Info
+                                Expanded(
+                                  child: Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      const Text(
+                                        'John Doe',
+                                        style: TextStyle(
+                                          fontSize: 20,
+                                          fontWeight: FontWeight.w600,
+                                          color: Color(0xFF3A3A3A),
+                                          fontFamily: 'Inter',
+                                        ),
+                                      ),
+                                      const SizedBox(height: 4),
+                                      const Text(
+                                        'Full Stack Developer',
+                                        style: TextStyle(
+                                          fontSize: 14,
+                                          fontWeight: FontWeight.w400,
+                                          color: Color(0xFF9A9A9A),
+                                          fontFamily: 'Inter',
+                                        ),
+                                      ),
+                                      const SizedBox(height: 8),
+                                      Row(
+                                        children: [
+                                          _buildSocialButton(Icons.code),
+                                          const SizedBox(width: 8),
+                                          _buildSocialButton(Icons.business_center),
+                                          const SizedBox(width: 8),
+                                          _buildSocialButton(Icons.email),
+                                        ],
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            ),
+                            const SizedBox(height: 20),
+                            // Stats
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              children: [
+                                _buildStatItem('50+', 'Projects', AppColors.secondary),
+                                _buildStatItem('5+', 'Years Exp', AppColors.accent),
+                                _buildStatItem('4.9', 'Rating', AppColors.lime),
+                              ],
+                            ),
+                          ],
+                        ),
                       ),
+                    ),
+
+                    // Tab Buttons
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+                      child: Row(
+                        children: [
+                          Expanded(
+                            child: _buildTabButton('Projects', 'projects'),
+                          ),
+                          const SizedBox(width: 8),
+                          Expanded(
+                            child: _buildTabButton('Skills', 'skills'),
+                          ),
+                          const SizedBox(width: 8),
+                          Expanded(
+                            child: _buildTabButton('Awards', 'achievements'),
+                          ),
+                        ],
+                      ),
+                    ),
+
+                    // Content
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 16),
+                      child: _buildTabContent(),
                     ),
                   ],
                 ),
-                Container(
-                  decoration: BoxDecoration(
-                    color: Colors.white.withOpacity(0.2),
-                    borderRadius: BorderRadius.circular(8),
-                  ),
-                  padding: const EdgeInsets.all(8),
-                  child: const Icon(Icons.share, color: AppColors.white, size: 20),
-                ),
-              ],
-            ),
-          ),
-
-          // Scrollable Content
-          Expanded(
-            child: SingleChildScrollView(
-              padding: const EdgeInsets.only(bottom: 20),
-              child: Column(
-                children: [
-                  // Profile Card
-                  Padding(
-                    padding: const EdgeInsets.only(left: 16, right: 16, top: 24, bottom: 16),
-                    child: Container(
-                      decoration: BoxDecoration(
-                        color: AppColors.white,
-                        borderRadius: BorderRadius.circular(24),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.black.withOpacity(0.08),
-                            blurRadius: 20,
-                            offset: const Offset(0, 4),
-                          ),
-                        ],
-                      ),
-                      padding: const EdgeInsets.all(20),
-                      child: Column(
-                        children: [
-                          Row(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              // Avatar
-                              Container(
-                                width: 70,
-                                height: 70,
-                                decoration: BoxDecoration(
-                                  gradient: LinearGradient(
-                                    begin: Alignment.topLeft,
-                                    end: Alignment.bottomRight,
-                                    colors: [AppColors.softGreen, AppColors.accent],
-                                  ),
-                                  borderRadius: BorderRadius.circular(16),
-                                ),
-                                child: const Center(
-                                  child: Text(
-                                    'JD',
-                                    style: TextStyle(
-                                      fontSize: 28,
-                                      fontWeight: FontWeight.w700,
-                                      color: AppColors.white,
-                                      fontFamily: 'Inter',
-                                    ),
-                                  ),
-                                ),
-                              ),
-                              const SizedBox(width: 16),
-                              // Info
-                              Expanded(
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    const Text(
-                                      'John Doe',
-                                      style: TextStyle(
-                                        fontSize: 20,
-                                        fontWeight: FontWeight.w600,
-                                        color: Color(0xFF3A3A3A),
-                                        fontFamily: 'Inter',
-                                      ),
-                                    ),
-                                    const SizedBox(height: 4),
-                                    const Text(
-                                      'Full Stack Developer',
-                                      style: TextStyle(
-                                        fontSize: 14,
-                                        fontWeight: FontWeight.w400,
-                                        color: Color(0xFF9A9A9A),
-                                        fontFamily: 'Inter',
-                                      ),
-                                    ),
-                                    const SizedBox(height: 8),
-                                    Row(
-                                      children: [
-                                        _buildSocialButton(Icons.code),
-                                        const SizedBox(width: 8),
-                                        _buildSocialButton(Icons.business_center),
-                                        const SizedBox(width: 8),
-                                        _buildSocialButton(Icons.email),
-                                      ],
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ],
-                          ),
-                          const SizedBox(height: 20),
-                          // Stats
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceAround,
-                            children: [
-                              _buildStatItem('50+', 'Projects', AppColors.secondary),
-                              _buildStatItem('5+', 'Years Exp', AppColors.accent),
-                              _buildStatItem('4.9', 'Rating', AppColors.lime),
-                            ],
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-
-                  // Tab Buttons
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
-                    child: Row(
-                      children: [
-                        Expanded(
-                          child: _buildTabButton('Projects', 'projects'),
-                        ),
-                        const SizedBox(width: 8),
-                        Expanded(
-                          child: _buildTabButton('Skills', 'skills'),
-                        ),
-                        const SizedBox(width: 8),
-                        Expanded(
-                          child: _buildTabButton('Awards', 'achievements'),
-                        ),
-                      ],
-                    ),
-                  ),
-
-                  // Content
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 16),
-                    child: _buildTabContent(),
-                  ),
-                ],
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
@@ -450,31 +448,14 @@ class _PortfolioScreenState extends State<PortfolioScreen> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Expanded(
-                          child: Text(
-                            project.title,
-                            style: const TextStyle(
-                              fontSize: 18,
-                              fontWeight: FontWeight.w600,
-                              color: Color(0xFF3A3A3A),
-                              fontFamily: 'Inter',
-                            ),
-                          ),
-                        ),
-                        const SizedBox(width: 8),
-                        Container(
-                          decoration: BoxDecoration(
-                            color: const Color(0xFFF5F5ED),
-                            borderRadius: BorderRadius.circular(8),
-                          ),
-                          padding: const EdgeInsets.all(8),
-                          child: const Icon(Icons.open_in_new, size: 16, color: Color(0xFF5A5A5A)),
-                        ),
-                      ],
+                    Text(
+                      project.title,
+                      style: const TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.w600,
+                        color: Color(0xFF3A3A3A),
+                        fontFamily: 'Inter',
+                      ),
                     ),
                     const SizedBox(height: 8),
                     Text(
@@ -646,13 +627,7 @@ class _PortfolioScreenState extends State<PortfolioScreen> {
                     const SizedBox(height: 4),
                     Text(
                       achievement.description,
-                      style: const TextStyle(
-                        fontSize: 14,
-                        fontWeight: FontWeight.w400,
-                        color: Color(0xFF9A9A9A),
-                        fontFamily: 'Inter',
-                        height: 1.5,
-                      ),
+                      style: AppTextStyles.body
                     ),
                   ],
                 ),

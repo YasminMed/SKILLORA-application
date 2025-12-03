@@ -7,7 +7,6 @@ import 'package:skillora/screens/career/portfolio_screen.dart';
 import 'package:skillora/screens/career/skill_tracker_screen.dart';
 import 'package:skillora/screens/career/career_roadmap_screen.dart';
 import 'package:skillora/screens/career/careert_bottom_nav_bar.dart';
-import 'package:skillora/screens/career/career_dashboard_screen.dart';
 
 
 // ================== IMPORT NAV BAR ==================
@@ -34,7 +33,7 @@ class _CareerMainLayoutState extends State<CareerMainLayout> {
   Widget _getScreen(String tab) {
     switch (tab) {
       case "jobs":
-        return const JobFinderScreen();
+        return const PastelJobFinderWidget();
       case "portfolio":
         return const PortfolioScreen();
       case "skills":

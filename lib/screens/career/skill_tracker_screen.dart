@@ -68,7 +68,8 @@ class SkillTrackerScreen extends StatelessWidget {
 }
 
 // ==================== APP BAR ====================
-class SkillTrackerAppBar extends StatelessWidget {
+// ==================== APP BAR ====================
+class SkillTrackerAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String userName;
 
   const SkillTrackerAppBar({super.key, required this.userName});
@@ -76,104 +77,36 @@ class SkillTrackerAppBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: BoxDecoration(
-        gradient: const LinearGradient(
+      height: preferredSize.height,
+      width: double.infinity,
+      decoration: const BoxDecoration(
+        gradient: LinearGradient(
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
           colors: [Color(0xFFD4E09B), Color(0xFFCBDFBD)],
         ),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.05),
-            blurRadius: 4,
-            offset: const Offset(0, 2),
+            color: Colors.black26,
+            blurRadius: 6,
+            offset: Offset(0, 2),
           ),
         ],
       ),
-      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          // Logo and App Name
-          Row(
-            children: [
-              Container(
-                width: 44,
-                height: 44,
-                decoration: BoxDecoration(
-                  gradient: const LinearGradient(
-                    begin: Alignment.topLeft,
-                    end: Alignment.bottomRight,
-                    colors: [Color(0xFFD4E09B), Color(0xFFCBDFBD)],
-                  ),
-                  borderRadius: BorderRadius.circular(16),
-                ),
-                child: const Icon(
-                  Icons.trending_up,
-                  color: Color(0xFF6F5E53),
-                  size: 24,
-                ),
-              ),
-              const SizedBox(width: 12),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: const [
-                  Text(
-                    'SkillTracker',
-                    style: TextStyle(
-                      fontSize: 22,
-                      fontWeight: FontWeight.w600,
-                      color: Color(0xFF6F5E53),
-                      height: 1,
-                    ),
-                  ),
-                  SizedBox(height: 4),
-                  Text(
-                    'Track your growth',
-                    style: TextStyle(
-                      fontSize: 12,
-                      fontWeight: FontWeight.w400,
-                      color: Color(0xFF6B7280),
-                    ),
-                  ),
-                ],
-              ),
-            ],
-          ),
-          // User Avatar
-          Container(
-            width: 44,
-            height: 44,
-            decoration: BoxDecoration(
-              gradient: const LinearGradient(
-                begin: Alignment.topLeft,
-                end: Alignment.bottomRight,
-                colors: [Color(0xFFF19C79), Color(0xFFFF6B6B)],
-              ),
-              shape: BoxShape.circle,
-              boxShadow: [
-                BoxShadow(
-                  color: const Color(0xFFFF6B6B).withOpacity(0.4),
-                  blurRadius: 8,
-                  offset: const Offset(0, 2),
-                ),
-              ],
-            ),
-            child: Center(
-              child: Text(
-                userName[0].toUpperCase(),
-                style: const TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.w600,
-                  color: Colors.white,
-                ),
-              ),
-            ),
-          ),
-        ],
+      alignment: Alignment.center,
+      child: Text(
+        'Skill Tracker',
+        style: const TextStyle(
+          fontSize: 22,
+          fontWeight: FontWeight.bold,
+          color: Color(0xFF6F5E53),
+        ),
       ),
     );
   }
+
+  @override
+  Size get preferredSize => const Size.fromHeight(60);
 }
 
 // ==================== SKILLS OVERVIEW ====================

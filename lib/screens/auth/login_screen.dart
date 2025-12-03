@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:skillora/screens/auth/forgot_password_screen.dart';
-import 'package:skillora/screens/modes.dart';
 import '../../constants/app_colors.dart';
 import '../../constants/app_text_styles.dart';
 import 'signup_screen.dart';
@@ -155,10 +154,9 @@ class LoginScreen extends StatelessWidget {
                           elevation: 0,
                         ),
                         onPressed: () {
-                          Navigator.push(
+                          Navigator.pushNamed(
                               context,
-                              MaterialPageRoute(
-                                  builder: (_) => const Modes()),
+                              '/modes',
                             );
                         },
                         child: Text(

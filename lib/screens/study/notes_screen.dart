@@ -314,7 +314,7 @@ class _NotesWidgetState extends State<NotesWidget> {
           ),
           Container(width: 1, height: 40, color: AppColors.grey.withOpacity(0.2)),
           Expanded(
-            child: _buildStatItem('Files', '$withFiles', Icons.attach_file, AppColors.softGreen),
+            child: _buildStatItem('Files', '$withFiles', Icons.attach_file, AppColors.grey),
           ),
         ],
       ),

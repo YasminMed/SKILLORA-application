@@ -55,10 +55,6 @@ class CareerDashboardWidget extends StatelessWidget {
   }
 }
 
-// ============================================================================
-// APP BAR WIDGET
-// ============================================================================
-
 class AppBarWidget extends StatelessWidget {
   final String userName;
 
@@ -100,7 +96,8 @@ class AppBarWidget extends StatelessWidget {
               const SizedBox(width: 10),
               Text(
                 'Career Path',
-                style: AppTextStyles.h1,
+                style: TextStyle(fontSize: 22,
+                fontWeight: FontWeight.bold, color: AppColors.darkBrown),
               ),
             ],
           ),
@@ -108,34 +105,44 @@ class AppBarWidget extends StatelessWidget {
             children: [
               Text(
                 userName,
-                style: AppTextStyles.body.copyWith(
+                style: TextStyle(
                   color: AppColors.white.withOpacity(0.9),
+                  fontSize: 16,
                 ),
               ),
               const SizedBox(width: 10),
-              Container(
-                width: 36,
-                height: 36,
-                decoration: BoxDecoration(
-                  color: AppColors.white,
-                  shape: BoxShape.circle,
-                  border: Border.all(
-                    color: AppColors.white.withOpacity(0.3),
-                    width: 2,
-                  ),
-                  boxShadow: [
-                    BoxShadow(
-                      color: AppColors.black.withOpacity(0.1),
-                      blurRadius: 8,
+             GestureDetector(
+                onTap: () {
+                  Navigator.pushNamed(
+                    context,
+                    '/career_profile',
+                  );
+                },
+                child: Container(
+                  width: 36,
+                  height: 36,
+                  decoration: BoxDecoration(
+                    color: AppColors.white,
+                    shape: BoxShape.circle,
+                    border: Border.all(
+                      color: AppColors.white.withOpacity(0.3),
+                      width: 2,
                     ),
-                  ],
-                ),
-                child: Center(
-                  child: Text(
-                    userName[0].toUpperCase(),
-                    style: AppTextStyles.body.copyWith(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w600,
+                    boxShadow: [
+                      BoxShadow(
+                        color: AppColors.black.withOpacity(0.1),
+                        blurRadius: 8,
+                      ),
+                    ],
+                  ),
+                  child: Center(
+                    child: Text(
+                      userName[0].toUpperCase(),
+                      style: const TextStyle(
+                        color: AppColors.primary,
+                        fontSize: 16,
+                        fontWeight: FontWeight.w600,
+                      ),
                     ),
                   ),
                 ),
@@ -543,7 +550,7 @@ class RecentActivitiesWidget extends StatelessWidget {
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
             decoration: BoxDecoration(
               gradient: LinearGradient(
-                colors: [AppColors.primary, AppColors.accent],
+                colors: [AppColors.primary, AppColors.softGreen],
               ),
               borderRadius: BorderRadius.circular(12),
               boxShadow: [
@@ -706,36 +713,7 @@ class CareerSuggestionsWidget extends StatelessWidget {
               ),
             ],
           ),
-          if (suggestion.isHighlighted)
-            Positioned(
-              top: 0,
-              right: 0,
-              child: Container(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 10,
-                  vertical: 2,
-                ),
-                decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                    colors: [AppColors.secondary, AppColors.accent],
-                  ),
-                  borderRadius: BorderRadius.circular(12),
-                  boxShadow: [
-                    BoxShadow(
-                      color: AppColors.black.withOpacity(0.1),
-                      blurRadius: 8,
-                    ),
-                  ],
-                ),
-                child: Text(
-                  'Recommended',
-                  style: AppTextStyles.tiny.copyWith(
-                    color: AppColors.white,
-                    fontWeight: FontWeight.w600,
-                  ),
-                ),
-              ),
-            ),
+          
         ],
       ),
     );
@@ -888,7 +866,7 @@ class PeopleWidget extends StatelessWidget {
             padding: const EdgeInsets.symmetric(vertical: 10),
             decoration: BoxDecoration(
               gradient: LinearGradient(
-                colors: [AppColors.primary, AppColors.accent],
+                colors: [AppColors.primary, AppColors.softGreen],
               ),
               borderRadius: BorderRadius.circular(12),
               boxShadow: [

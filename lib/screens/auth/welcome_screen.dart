@@ -1,9 +1,7 @@
 //welcome
 import 'package:flutter/material.dart';
-import 'package:skillora/screens/auth/splash.dart';
 import '../../constants/app_colors.dart';
 import '../../constants/app_text_styles.dart';
-import 'signup_screen.dart';
 
 class WelcomeScreen extends StatelessWidget {
   const WelcomeScreen({super.key});
@@ -34,28 +32,7 @@ class WelcomeScreen extends StatelessWidget {
             const SizedBox(height: 40),
 
             /// LOGO
-            Container(
-              width: 120,
-              height: 120,
-              decoration: BoxDecoration(
-                color: Colors.white.withOpacity(.9),
-                borderRadius: BorderRadius.circular(100),
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.black.withOpacity(.1),
-                    blurRadius: 10,
-                    offset: const Offset(0, 5),
-                  )
-                ],
-              ),
-              child: Center(
-                child: Icon(
-                  Icons.auto_awesome,
-                  color: AppColors.primary,
-                  size: 55,
-                ),
-              ),
-            ),
+            Image.asset("assets/images/logo.png", width: 150, height: 150),
 
             const SizedBox(height: 40),
 
@@ -136,9 +113,9 @@ class WelcomeScreen extends StatelessWidget {
                     elevation: 0,
                   ),
                   onPressed: () {
-                    Navigator.push(
+                    Navigator.pushNamed(
                       context,
-                      MaterialPageRoute(builder: (_) => const SkilluraSplashScreen()),
+                     '/splash',
                     );
                   },
                   child: Row(

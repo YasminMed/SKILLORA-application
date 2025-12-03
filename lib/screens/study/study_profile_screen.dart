@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:skillora/constants/app_colors.dart';
+import 'package:skillora/constants/app_text_styles.dart';
 
 class StudyProfileWidget extends StatelessWidget {
   const StudyProfileWidget({super.key});
@@ -8,7 +9,7 @@ class StudyProfileWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Material(
-        color: AppColors.white, // required for ListTile & buttons
+        color: AppColors.white,
         child: Column(
           children: [
             // ---------------- Custom AppBar ----------------
@@ -25,32 +26,28 @@ class StudyProfileWidget extends StatelessWidget {
                 ],
               ),
               child: Stack(
-                  alignment: Alignment.center,
-                  children: [
-                    // BACK BUTTON
-                    Align(
-                      alignment: Alignment.centerLeft,
-                      child: GestureDetector(
-                        onTap: () => Navigator.pop(context),
-                        child: const Icon(Icons.arrow_back, color: AppColors.white),
-                      ),
+                alignment: Alignment.center,
+                children: [
+                  Align(
+                    alignment: Alignment.centerLeft,
+                    child: GestureDetector(
+                      onTap: () => Navigator.pop(context),
+                      child: const Icon(Icons.arrow_back, color: AppColors.white),
                     ),
-      
-                    // CENTERED TITLE
-                    const Text(
-                      "Profile",
-                      style: TextStyle(
-                        color: AppColors.white,
-                        fontSize: 20,
-                        fontWeight: FontWeight.w600,
-                      ),
+                  ),
+                  const Text(
+                    "Profile",
+                    style: TextStyle(
+                      color: AppColors.white,
+                      fontSize: 20,
+                      fontWeight: FontWeight.w600,
                     ),
-                  ],
-                ),
-      
+                  ),
+                ],
+              ),
             ),
-      
-            // ---------------- Body Content ----------------
+
+            // ---------------- Body ----------------
             Expanded(
               child: SingleChildScrollView(
                 padding: const EdgeInsets.all(20),
@@ -105,9 +102,9 @@ class StudyProfileWidget extends StatelessWidget {
                         ),
                       ],
                     ),
-      
+
                     const SizedBox(height: 24),
-      
+
                     _sectionTitle("Account Settings"),
                     _profileAction(
                       icon: Icons.person,
@@ -121,9 +118,9 @@ class StudyProfileWidget extends StatelessWidget {
                       color: AppColors.darkBrown,
                       onTap: () => _editPasswordSheet(context),
                     ),
-      
+
                     const SizedBox(height: 20),
-      
+
                     _sectionTitle("Navigation"),
                     _profileAction(
                       icon: Icons.route,
@@ -137,9 +134,9 @@ class StudyProfileWidget extends StatelessWidget {
                       color: AppColors.darkBrown,
                       onTap: () => _switchAccountSheet(context),
                     ),
-      
+
                     const SizedBox(height: 20),
-      
+
                     _sectionTitle("Danger Zone"),
                     _profileAction(
                       icon: Icons.logout,
@@ -150,7 +147,9 @@ class StudyProfileWidget extends StatelessWidget {
                           context,
                           title: "Logout",
                           message: "Are you sure you want to log out?",
-                          onYes: () {},
+                          onYes: () {
+                            Navigator.pushNamed(context, "/login");
+                          },
                         );
                       },
                     ),
@@ -232,7 +231,8 @@ class StudyProfileWidget extends StatelessWidget {
           ),
           title: Text(
             text,
-            style: TextStyle(color: color, fontSize: 16, fontWeight: FontWeight.w600),
+            style: TextStyle(
+                color: color, fontSize: 16, fontWeight: FontWeight.w600),
           ),
           trailing: Icon(Icons.arrow_forward_ios, color: color, size: 16),
         ),
@@ -242,22 +242,33 @@ class StudyProfileWidget extends StatelessWidget {
 
   // ---------------- Confirm Dialog ----------------
   void _confirmAction(BuildContext context,
-      {required String title, required String message, required VoidCallback onYes}) {
+      {required String title,
+      required String message,
+      required VoidCallback onYes}) {
     showDialog(
       context: context,
       builder: (context) {
         return AlertDialog(
           backgroundColor: AppColors.white,
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(18)),
-          title: Text(title, style: const TextStyle(color: AppColors.primary, fontSize: 18, fontWeight: FontWeight.w600)),
-          content: Text(message, style: const TextStyle(color: AppColors.darkBrown)),
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(18)),
+          title: Text(title,
+              style: const TextStyle(
+                  color: AppColors.primary,
+                  fontSize: 18,
+                  fontWeight: FontWeight.w600)),
+          content: Text(message,
+              style: const TextStyle(color: AppColors.darkBrown)),
           actions: [
             TextButton(
-              child: const Text("Cancel", style: TextStyle(color: AppColors.grey)),
+              child: const Text("Cancel",
+                  style: TextStyle(color: AppColors.grey)),
               onPressed: () => Navigator.pop(context),
             ),
             TextButton(
-              child: const Text("Yes", style: TextStyle(color: AppColors.primary, fontWeight: FontWeight.w600)),
+              child: const Text("Yes",
+                  style:
+                      TextStyle(color: AppColors.primary, fontWeight: FontWeight.w600)),
               onPressed: () {
                 Navigator.pop(context);
                 onYes();
@@ -270,8 +281,169 @@ class StudyProfileWidget extends StatelessWidget {
   }
 
   // ---------------- Bottom Sheets ----------------
-  void _editNameSheet(BuildContext context) {}
-  void _editPasswordSheet(BuildContext context) {}
-  void _switchCareerSheet(BuildContext context) {}
-  void _switchAccountSheet(BuildContext context) {}
+
+  void _editNameSheet(BuildContext context) {
+    showModalBottomSheet(
+      context: context,
+      backgroundColor: AppColors.white,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(22)),
+      ),
+      builder: (context) {
+        return Padding(
+          padding: const EdgeInsets.all(20),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              const Text("Edit Name",
+                  style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.w600,
+                      color: AppColors.primary)),
+              const SizedBox(height: 16),
+              const TextField(
+                decoration: InputDecoration(
+                  labelText: "New Name",
+                  border: OutlineInputBorder(),
+                ),
+              ),
+              const SizedBox(height: 16),
+              ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: AppColors.primary,
+                ),
+                onPressed: () => Navigator.pop(context),
+                child: Text("Edit",style: AppTextStyles.button, ), ),
+              
+            ],
+          ),
+        );
+      },
+    );
+  }
+
+  void _editPasswordSheet(BuildContext context) {
+    showModalBottomSheet(
+      context: context,
+      backgroundColor: AppColors.white,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(22)),
+      ),
+      builder: (context) {
+        return Padding(
+          padding: const EdgeInsets.all(20),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              const Text("Change Password",
+                  style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.w600,
+                      color: AppColors.primary)),
+              const SizedBox(height: 16),
+              const TextField(
+                obscureText: true,
+                decoration: InputDecoration(
+                  labelText: "New Password",
+                  border: OutlineInputBorder(),
+                ),
+              ),
+              const SizedBox(height: 16),
+              ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: AppColors.primary,
+                ),
+                onPressed: () => Navigator.pop(context),
+                child: Text("Edit",style: AppTextStyles.button, ),),
+              
+            ],
+          ),
+        );
+      },
+    );
+  }
+
+  void _switchCareerSheet(BuildContext context) {
+  showModalBottomSheet(
+    context: context,
+    isScrollControlled: true, // يجعلها full width بالعرض الكامل
+    backgroundColor: Colors.transparent, // نتحكم بالزوايا واللون داخل الـ container
+    builder: (context) {
+      return Container(
+        width: double.infinity,
+        decoration: const BoxDecoration(
+          color: AppColors.white,
+          borderRadius: BorderRadius.vertical(top: Radius.circular(22)),
+        ),
+        padding: const EdgeInsets.all(20),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            const Text("Switch to Career Path?",
+                style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.w600,
+                    color: AppColors.primary)),
+            const SizedBox(height: 16),
+            SizedBox(
+              width: 200, // الزر يبقى بنفس الحجم كما طلبت
+              child: ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: AppColors.primary,
+                ),
+                onPressed: () {
+                  Navigator.pop(context);
+                  Navigator.pushNamed(context, "/modes");
+                },
+                child: Text("Sure", style: AppTextStyles.button),
+              ),
+            ),
+          ],
+        ),
+      );
+    },
+  );
+}
+
+void _switchAccountSheet(BuildContext context) {
+  showModalBottomSheet(
+    context: context,
+    isScrollControlled: true,
+    backgroundColor: Colors.transparent,
+    builder: (context) {
+      return Container(
+        width: double.infinity,
+        decoration: const BoxDecoration(
+          color: AppColors.white,
+          borderRadius: BorderRadius.vertical(top: Radius.circular(22)),
+        ),
+        padding: const EdgeInsets.all(20),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            const Text("Switch Account?",
+                style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.w600,
+                    color: AppColors.primary)),
+            const SizedBox(height: 16),
+            SizedBox(
+              width: 200,
+              child: ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: AppColors.primary,
+                ),
+                onPressed: () {
+                  Navigator.pop(context);
+                  Navigator.pushNamed(context, "/login");
+                },
+                child: Text("Switch", style: AppTextStyles.button),
+              ),
+            ),
+          ],
+        ),
+      );
+    },
+  );
+}
 }

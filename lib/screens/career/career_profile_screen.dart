@@ -2,11 +2,63 @@ import 'package:flutter/material.dart';
 import 'package:skillora/constants/app_colors_career.dart';
 import 'package:skillora/constants/app_text_styles.dart';
 
+// ============================================================================
+// NEW APPBAR WIDGET
+// ============================================================================
+class AppBarWidget extends StatelessWidget implements PreferredSizeWidget {
+  const AppBarWidget({super.key, this.title = "Career Profile"});
 
+  final String title;
 
-// ------------------------------
-// Main App
-// ------------------------------
+  @override
+  Widget build(BuildContext context) {
+    return SafeArea(
+      child: Container(
+        height: preferredSize.height,
+        width: double.infinity,
+        padding: const EdgeInsets.symmetric(horizontal: 12),
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+            colors: [Color(0xFFD4E09B), Color(0xFFCBDFBD)],
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+          ),
+        ),
+        child: Row(
+          children: [
+            // BACK BUTTON
+            IconButton(
+              onPressed: () => Navigator.pop(context),
+              icon: const Icon(
+                Icons.arrow_back_ios,
+                color: Color(0xFF5C432A),
+                size: 20,
+              ),
+            ),
+            const Spacer(),
+            // TITLE
+            Text(
+              title,
+              style: const TextStyle(
+                color: Color(0xFF5C432A),
+                fontSize: 22,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            const Spacer(),
+          ],
+        ),
+      ),
+    );
+  }
+
+  @override
+  Size get preferredSize => const Size.fromHeight(56);
+}
+
+// ============================================================================
+// MAIN APP
+// ============================================================================
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
@@ -19,205 +71,129 @@ class MyApp extends StatelessWidget {
         primaryColor: AppColors.primary,
         scaffoldBackgroundColor: AppColors.white,
       ),
-      home:  CareerProfileScreen(),
+      home: const CareerProfileScreen(),
     );
   }
 }
 
-// ------------------------------
-// Custom App Bar Widget
-// ------------------------------
-class AppBarWidget extends StatelessWidget {
-  final String userName;
-  const AppBarWidget({Key? key, required this.userName}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        gradient: LinearGradient(
-          colors: [AppColors.primary, AppColors.accent],
-        ),
-        boxShadow: [
-          BoxShadow(
-            color: AppColors.primary.withOpacity(0.3),
-            blurRadius: 20,
-            offset: const Offset(0, 4),
-          ),
-        ],
-      ),
-      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 14),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Row(
-            children: [
-              Container(
-                padding: const EdgeInsets.all(6),
-                decoration: BoxDecoration(
-                  color: AppColors.white.withOpacity(0.2),
-                  borderRadius: BorderRadius.circular(12),
-                ),
-                child: const Icon(
-                  Icons.person,
-                  color: AppColors.white,
-                  size: 20,
-                ),
-              ),
-              const SizedBox(width: 10),
-              Text(
-                'Career Profile',
-                style: AppTextStyles.h1,
-              ),
-            ],
-          ),
-
-          // Removed initial and kept an empty circle
-          Container(
-            width: 36,
-            height: 36,
-            decoration: BoxDecoration(
-             
-              boxShadow: [
-                BoxShadow(
-                  color: AppColors.black.withOpacity(0.1),
-                  blurRadius: 8,
-                ),
-              ],
-            ),
-            child: const SizedBox(), // EMPTY (NO J ANYMORE)
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-// ------------------------------
-// Career Profile Screen
-// ------------------------------
+// ============================================================================
+// CAREER PROFILE SCREEN
+// ============================================================================
 class CareerProfileScreen extends StatelessWidget {
   const CareerProfileScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: AppColors.white,
-      child: SafeArea(
+    return Scaffold(
+      backgroundColor: AppColors.white,
+      appBar: const AppBarWidget(title: "Career Profile"),
+      body: SingleChildScrollView(
+        padding: const EdgeInsets.all(20),
+        physics: const BouncingScrollPhysics(),
         child: Column(
           children: [
-            const AppBarWidget(userName: 'John'),
-            Expanded(
-              child: SingleChildScrollView(
-                padding: const EdgeInsets.all(20),
-                physics: const BouncingScrollPhysics(),
-                child: Column(
-                  children: [
-                    // Avatar + Name
-                    Column(
-                      children: [
-                        Container(
-                          width: 80,
-                          height: 80,
-                          decoration: BoxDecoration(
-                            gradient: const LinearGradient(
-                              colors: [AppColors.primary, AppColors.accent],
-                            ),
-                            shape: BoxShape.circle,
-                            boxShadow: [
-                              BoxShadow(
-                                color: AppColors.primary.withOpacity(0.3),
-                                blurRadius: 10,
-                              ),
-                            ],
-                          ),
-                          child: const Center(
-                            child: Icon(
-                              Icons.person,
-                              color: AppColors.white,
-                              size: 40,
-                            ),
-                          ),
-                        ),
-                        const SizedBox(height: 12),
-                        Text(
-                          "John Doe",
-                          style: AppTextStyles.h2.copyWith(
-                            fontSize: 20,
-                          ),
-                        ),
-                        const SizedBox(height: 4),
-                        Text(
-                          "john.doe@example.com",
-                          style: AppTextStyles.small.copyWith(
-                            color: AppColors.grey,
-                          ),
-                        ),
-                      ],
+            // Avatar + Name
+            Column(
+              children: [
+                Container(
+                  width: 80,
+                  height: 80,
+                  decoration: BoxDecoration(
+                    gradient: const LinearGradient(
+                      colors: [AppColors.primary, AppColors.lime],
                     ),
-
-                    const SizedBox(height: 24),
-
-                    _sectionTitle("Account Settings"),
-                    _profileAction(
-                      icon: Icons.person,
-                      text: "Edit Profile Name",
-                      color: AppColors.primary,
-                      onTap: () => _editNameSheet(context),
+                    shape: BoxShape.circle,
+                    boxShadow: [
+                      BoxShadow(
+                        color: AppColors.primary.withOpacity(0.3),
+                        blurRadius: 10,
+                      ),
+                    ],
+                  ),
+                  child: const Center(
+                    child: Icon(
+                      Icons.person,
+                      color: AppColors.white,
+                      size: 40,
                     ),
-                    _profileAction(
-                      icon: Icons.lock,
-                      text: "Change Password",
-                      color: AppColors.primary,
-                      onTap: () => _editPasswordSheet(context),
-                    ),
-
-                    const SizedBox(height: 20),
-                    _sectionTitle("Navigation"),
-                    _profileAction(
-                      icon: Icons.school,
-                      text: "Switch to Study Mode",
-                      color: AppColors.primary,
-                      onTap: () => _switchStudySheet(context),
-                    ),
-                    _profileAction(
-                      icon: Icons.swap_horiz,
-                      text: "Switch to Another Account",
-                      color: AppColors.primary,
-                      onTap: () => _switchAccountSheet(context),
-                    ),
-
-                    const SizedBox(height: 20),
-                    _sectionTitle("Danger Zone"),
-                    _profileAction(
-                      icon: Icons.logout,
-                      text: "Logout",
-                      color: Colors.red,
-                      onTap: () {
-                        _confirmAction(
-                          context,
-                          title: "Logout",
-                          message: "Are you sure you want to log out?",
-                          onYes: () {},
-                        );
-                      },
-                    ),
-                    _profileAction(
-                      icon: Icons.delete_forever,
-                      text: "Delete Account",
-                      color: Colors.red.shade700,
-                      onTap: () {
-                        _confirmAction(
-                          context,
-                          title: "Delete Account",
-                          message: "This action cannot be undone!",
-                          onYes: () {},
-                        );
-                      },
-                    ),
-                  ],
+                  ),
                 ),
-              ),
+                const SizedBox(height: 12),
+                Text(
+                  "John Doe",
+                  style: AppTextStyles.h2.copyWith(
+                    fontSize: 20,
+                  ),
+                ),
+                const SizedBox(height: 4),
+                Text(
+                  "john.doe@example.com",
+                  style: AppTextStyles.small.copyWith(
+                    color: AppColors.grey,
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: 24),
+
+            _sectionTitle("Account Settings"),
+            _profileAction(
+              icon: Icons.person,
+              text: "Edit Profile Name",
+              color: AppColors.darkBrown,
+              onTap: () => _editNameSheet(context),
+            ),
+            _profileAction(
+              icon: Icons.lock,
+              text: "Change Password",
+              color: AppColors.darkBrown,
+              onTap: () => _editPasswordSheet(context),
+            ),
+
+            const SizedBox(height: 20),
+            _sectionTitle("Navigation"),
+            _profileAction(
+              icon: Icons.school,
+              text: "Switch to Study Mode",
+              color: AppColors.darkBrown,
+              onTap: () => _switchStudySheet(context),
+            ),
+            _profileAction(
+              icon: Icons.swap_horiz,
+              text: "Switch to Another Account",
+              color: AppColors.darkBrown,
+              onTap: () => _switchAccountSheet(context),
+            ),
+
+            const SizedBox(height: 20),
+            _sectionTitle("Danger Zone"),
+            _profileAction(
+              icon: Icons.logout,
+              text: "Logout",
+              color: Colors.red,
+              onTap: () {
+                _confirmAction(
+                  context,
+                  title: "Logout",
+                  message: "Are you sure you want to log out?",
+                  onYes: () {
+                    Navigator.pushNamed(context, "/login");
+                  },
+                );
+              },
+            ),
+            _profileAction(
+              icon: Icons.delete_forever,
+              text: "Delete Account",
+              color: Colors.red.shade700,
+              onTap: () {
+                _confirmAction(
+                  context,
+                  title: "Delete Account",
+                  message: "This action cannot be undone!",
+                  onYes: () {},
+                );
+              },
             ),
           ],
         ),
@@ -225,9 +201,9 @@ class CareerProfileScreen extends StatelessWidget {
     );
   }
 
-  // ------------------------------
-  // Section Title
-  // ------------------------------
+  // ================================================================
+  // SECTION TITLE
+  // ================================================================
   Widget _sectionTitle(String title) {
     return Container(
       width: double.infinity,
@@ -236,16 +212,16 @@ class CareerProfileScreen extends StatelessWidget {
       child: Text(
         title,
         style: AppTextStyles.h2.copyWith(
-          color: AppColors.primary,
+          color: AppColors.grey,
           fontSize: 18,
         ),
       ),
     );
   }
 
-  // ------------------------------
-  // Profile Action Tile
-  // ------------------------------
+  // ================================================================
+  // PROFILE ACTION TILE
+  // ================================================================
   Widget _profileAction({
     required IconData icon,
     required String text,
@@ -278,7 +254,7 @@ class CareerProfileScreen extends StatelessWidget {
           padding: const EdgeInsets.all(10),
           decoration: BoxDecoration(
             gradient: const LinearGradient(
-              colors: [AppColors.accent, AppColors.primary],
+              colors: [AppColors.lime, AppColors.primary],
             ),
             borderRadius: BorderRadius.circular(14),
           ),
@@ -296,9 +272,9 @@ class CareerProfileScreen extends StatelessWidget {
     );
   }
 
-  // ------------------------------
-  // Confirm Dialog
-  // ------------------------------
+  // ================================================================
+  // CONFIRM DIALOG
+  // ================================================================
   void _confirmAction(
     BuildContext context, {
     required String title,
@@ -352,11 +328,10 @@ class CareerProfileScreen extends StatelessWidget {
     );
   }
 
-  // ------------------------------
-  // Bottom Sheets
-  // ------------------------------
+  // ================================================================
+  // BOTTOM SHEETS
+  // ================================================================
   void _editNameSheet(BuildContext context) {
-    final controller = TextEditingController();
     showModalBottomSheet(
       context: context,
       isScrollControlled: true,
@@ -383,20 +358,10 @@ class CareerProfileScreen extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 16),
-              TextField(
-                controller: controller,
-                style: AppTextStyles.body,
+              const TextField(
                 decoration: InputDecoration(
                   labelText: "New Name",
-                  labelStyle: AppTextStyles.label,
-                  focusedBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(12),
-                    borderSide:
-                        const BorderSide(color: AppColors.primary, width: 2),
-                  ),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(12),
-                  ),
+                  border: OutlineInputBorder(),
                 ),
               ),
               const SizedBox(height: 16),
@@ -409,10 +374,7 @@ class CareerProfileScreen extends StatelessWidget {
                   ),
                 ),
                 onPressed: () => Navigator.pop(context),
-                child: Text(
-                  "Save",
-                  style: AppTextStyles.button,
-                ),
+                child: Text("Save", style: AppTextStyles.button),
               ),
             ],
           ),
@@ -422,9 +384,6 @@ class CareerProfileScreen extends StatelessWidget {
   }
 
   void _editPasswordSheet(BuildContext context) {
-    final oldPass = TextEditingController();
-    final newPass = TextEditingController();
-
     showModalBottomSheet(
       context: context,
       isScrollControlled: true,
@@ -451,29 +410,11 @@ class CareerProfileScreen extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 16),
-              TextField(
-                controller: oldPass,
+              const TextField(
                 obscureText: true,
-                style: AppTextStyles.body,
-                decoration: InputDecoration(
-                  labelText: "Old Password",
-                  labelStyle: AppTextStyles.label,
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(12),
-                  ),
-                ),
-              ),
-              const SizedBox(height: 12),
-              TextField(
-                controller: newPass,
-                obscureText: true,
-                style: AppTextStyles.body,
                 decoration: InputDecoration(
                   labelText: "New Password",
-                  labelStyle: AppTextStyles.label,
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(12),
-                  ),
+                  border: OutlineInputBorder(),
                 ),
               ),
               const SizedBox(height: 16),
@@ -486,10 +427,7 @@ class CareerProfileScreen extends StatelessWidget {
                   ),
                 ),
                 onPressed: () => Navigator.pop(context),
-                child: Text(
-                  "Update Password",
-                  style: AppTextStyles.button,
-                ),
+                child: Text("Update Password", style: AppTextStyles.button),
               ),
             ],
           ),
@@ -501,12 +439,15 @@ class CareerProfileScreen extends StatelessWidget {
   void _switchStudySheet(BuildContext context) {
     showModalBottomSheet(
       context: context,
-      backgroundColor: AppColors.white,
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(top: Radius.circular(22)),
-      ),
+      isScrollControlled: true,
+      backgroundColor: Colors.transparent,
       builder: (_) {
-        return Padding(
+        return Container(
+          width: double.infinity,
+          decoration: const BoxDecoration(
+            color: AppColors.white,
+            borderRadius: BorderRadius.vertical(top: Radius.circular(22)),
+          ),
           padding: const EdgeInsets.all(22),
           child: Column(
             mainAxisSize: MainAxisSize.min,
@@ -519,16 +460,21 @@ class CareerProfileScreen extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 16),
-              ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: AppColors.primary,
-                  minimumSize: const Size(double.infinity, 48),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(14),
+              SizedBox(
+                width: 200,
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: AppColors.primary,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(14),
+                    ),
                   ),
+                  onPressed: () {
+                    Navigator.pop(context);
+                    Navigator.pushNamed(context, "/modes");
+                  },
+                  child: Text("Go", style: AppTextStyles.button),
                 ),
-                onPressed: () => Navigator.pop(context),
-                child: Text("Go", style: AppTextStyles.button),
               ),
             ],
           ),
@@ -540,12 +486,15 @@ class CareerProfileScreen extends StatelessWidget {
   void _switchAccountSheet(BuildContext context) {
     showModalBottomSheet(
       context: context,
-      backgroundColor: AppColors.white,
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(top: Radius.circular(22)),
-      ),
+      isScrollControlled: true,
+      backgroundColor: Colors.transparent,
       builder: (_) {
-        return Padding(
+        return Container(
+          width: double.infinity,
+          decoration: const BoxDecoration(
+            color: AppColors.white,
+            borderRadius: BorderRadius.vertical(top: Radius.circular(22)),
+          ),
           padding: const EdgeInsets.all(22),
           child: Column(
             mainAxisSize: MainAxisSize.min,
@@ -558,16 +507,21 @@ class CareerProfileScreen extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 16),
-              ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: AppColors.primary,
-                  minimumSize: const Size(double.infinity, 48),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(14),
+              SizedBox(
+                width: 200,
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: AppColors.primary,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(14),
+                    ),
                   ),
+                  onPressed: () {
+                    Navigator.pop(context);
+                    Navigator.pushNamed(context, "/login");
+                  },
+                  child: Text("Go to Login", style: AppTextStyles.button),
                 ),
-                onPressed: () => Navigator.pop(context),
-                child: Text("Go to Login", style: AppTextStyles.button),
               ),
             ],
           ),

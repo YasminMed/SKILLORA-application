@@ -1,30 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:skillora/constants/app_colors.dart';
 import 'package:skillora/constants/app_text_styles.dart';
-import 'package:skillora/screens/career/career_main_layout.dart.dart';
-import 'package:skillora/screens/study/student_main_screen.dart';
-import 'package:skillora/screens/study/study_dashboard_screen.dart';
-
-
-
-void main() {
-  runApp(const Modes());
-}
 
 class Modes extends StatelessWidget {
-  const Modes({Key? key}) : super(key: key);
+  const Modes({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Choose Your Path',
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        primaryColor: AppColors.primary,
-        scaffoldBackgroundColor: AppColors.white,
-      ),
-      home: const PathSelectionScreen(),
-    );
+    return const PathSelectionScreen();
   }
 }
 
@@ -37,7 +20,6 @@ class PathSelectionScreen extends StatefulWidget {
 
 class _PathSelectionScreenState extends State<PathSelectionScreen>
     with SingleTickerProviderStateMixin {
-  String? _hoveredPath;
   late AnimationController _animationController;
 
   @override
@@ -55,7 +37,7 @@ class _PathSelectionScreenState extends State<PathSelectionScreen>
     super.dispose();
   }
 
-@override
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
@@ -79,29 +61,23 @@ class _PathSelectionScreenState extends State<PathSelectionScreen>
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    // Header Section
-                    Column(
-                      children: [
-                        Text(
-                          'Choose Your Path',
-                          style: AppTextStyles.h1.copyWith(
-                            height: 1.2,
-                          ),
-                          textAlign: TextAlign.center,
-                        ),
-                        const SizedBox(height: 12),
-                        Text(
-                          'Select the journey you want to explore',
-                          style: AppTextStyles.small.copyWith(
-                            color: AppColors.darkBrown,
-                          ),
-                          textAlign: TextAlign.center,
-                        ),
-                      ],
+                    // Header
+                    Text(
+                      'Choose Your Path',
+                      style: AppTextStyles.h1.copyWith(height: 1.2),
+                      textAlign: TextAlign.center,
+                    ),
+                    const SizedBox(height: 12),
+                    Text(
+                      'Select the journey you want to explore',
+                      style: AppTextStyles.small.copyWith(
+                        color: AppColors.darkBrown,
+                      ),
+                      textAlign: TextAlign.center,
                     ),
                     const SizedBox(height: 32),
 
-                    // Path Cards
+                    // Study Path
                     _PathCard(
                       title: 'Study Path',
                       description: 'Plan and track your academic journey',
@@ -111,10 +87,13 @@ class _PathSelectionScreenState extends State<PathSelectionScreen>
                         Color(0xFFF19C79),
                       ],
                       onTap: () {
-                        Navigator.push(context, MaterialPageRoute(builder: (_)=>StudentMainScreen()));
+                        Navigator.pushNamed(context, '/student_main');
                       },
                     ),
+
                     const SizedBox(height: 16),
+
+                    // Career Path
                     _PathCard(
                       title: 'Career Path',
                       description: 'Build and grow your professional future',
@@ -122,15 +101,12 @@ class _PathSelectionScreenState extends State<PathSelectionScreen>
                       gradientColors: const [
                         Color.fromARGB(255, 147, 163, 68),
                         Color.fromARGB(255, 192, 231, 164),
-
                       ],
                       onTap: () {
-                        Navigator.push(context, MaterialPageRoute(builder: (_)=>CareerMainLayout()));
-
+                        Navigator.pushNamed(context, '/career_main');
                       },
                     ),
 
-                    // Bottom Hint
                     const SizedBox(height: 32),
                     Text(
                       'You can switch paths anytime in settings',
@@ -254,7 +230,6 @@ class _PathCardState extends State<_PathCard>
           ),
           child: Stack(
             children: [
-              // Background Pattern
               Positioned.fill(
                 child: Opacity(
                   opacity: 0.1,
@@ -301,12 +276,10 @@ class _PathCardState extends State<_PathCard>
                 ),
               ),
 
-// Content
               Padding(
                 padding: const EdgeInsets.all(20),
                 child: Row(
                   children: [
-                    // Icon Container
                     AnimatedBuilder(
                       animation: _controller,
                       builder: (context, child) {
@@ -323,12 +296,6 @@ class _PathCardState extends State<_PathCard>
                                   color: AppColors.white.withOpacity(0.3),
                                   width: 1,
                                 ),
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: AppColors.black.withOpacity(0.1),
-                                    blurRadius: 10,
-                                  ),
-                                ],
                               ),
                               child: Icon(
                                 widget.icon,
@@ -340,9 +307,9 @@ class _PathCardState extends State<_PathCard>
                         );
                       },
                     ),
+
                     const SizedBox(width: 16),
 
-                    // Text Content
                     Expanded(
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -366,13 +333,12 @@ class _PathCardState extends State<_PathCard>
                       ),
                     ),
 
-                    // Arrow Icon
                     AnimatedOpacity(
                       opacity: _isPressed ? 1.0 : 0.6,
                       duration: const Duration(milliseconds: 300),
-                      child: Icon(
+                      child: const Icon(
                         Icons.arrow_forward,
-                        color: AppColors.white,
+                        color: Colors.white,
                         size: 24,
                       ),
                     ),
