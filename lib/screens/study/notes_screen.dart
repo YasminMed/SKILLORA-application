@@ -69,7 +69,6 @@ class _NotesWidgetState extends State<NotesWidget> {
   final TextEditingController _searchController = TextEditingController();
   String selectedCategory = 'All';
   bool isGridView = false;
-  String searchQuery = '';
 
   final List<Note> notes = [
     Note(
@@ -100,13 +99,6 @@ class _NotesWidgetState extends State<NotesWidget> {
 
     if (selectedCategory != 'All') {
       filtered = filtered.where((note) => note.categoryName == selectedCategory).toList();
-    }
-
-    if (searchQuery.isNotEmpty) {
-      filtered = filtered.where((note) {
-        return note.title.toLowerCase().contains(searchQuery.toLowerCase()) ||
-            note.content.toLowerCase().contains(searchQuery.toLowerCase());
-      }).toList();
     }
 
     filtered.sort((a, b) {
