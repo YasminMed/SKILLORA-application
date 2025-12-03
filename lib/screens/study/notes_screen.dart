@@ -66,7 +66,6 @@ class NotesWidget extends StatefulWidget {
 }
 
 class _NotesWidgetState extends State<NotesWidget> {
-  final TextEditingController _searchController = TextEditingController();
   String selectedCategory = 'All';
   bool isGridView = false;
 
@@ -110,11 +109,6 @@ class _NotesWidgetState extends State<NotesWidget> {
     return filtered;
   }
 
-  @override
-  void dispose() {
-    _searchController.dispose();
-    super.dispose();
-  }
 
   @override
   Widget build(BuildContext context) {
