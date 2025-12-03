@@ -5,30 +5,19 @@ import '../../constants/app_text_styles.dart';
 class Goal {
   final String id;
   final String title;
-  final String description;
   final int progress;
-  final DateTime deadline;
-  final List<String> milestones;
-  final int completedMilestones;
   final bool isCompleted;
 
   Goal({
     required this.id,
     required this.title,
-    required this.description,
     required this.progress,
-    required this.deadline,
-    required this.milestones,
-    required this.completedMilestones,
     this.isCompleted = false,
   });
 
-  int get daysRemaining => deadline.difference(DateTime.now()).inDays;
-
-  // Default styling (since category removed)
+  // Default styling for UI
   Color get categoryColor => AppColors.primary;
   IconData get categoryIcon => Icons.flag_outlined;
-  String get categoryName => "Goal";
 }
 
 class StudentGoalScreen extends StatefulWidget {
@@ -40,24 +29,8 @@ class StudentGoalScreen extends StatefulWidget {
 
 class _StudentGoalScreenState extends State<StudentGoalScreen> {
   final List<Goal> goals = [
-    Goal(
-      id: '1',
-      title: 'Complete Data Structures Course',
-      description: 'Master all fundamental data structures and algorithms',
-      progress: 75,
-      deadline: DateTime.now().add(const Duration(days: 15)),
-      milestones: ['Arrays & Strings', 'Linked Lists', 'Trees & Graphs', 'Algorithm Problems'],
-      completedMilestones: 3,
-    ),
-    Goal(
-      id: '2',
-      title: 'Learn Flutter Development',
-      description: 'Build mobile apps with Flutter and Dart',
-      progress: 45,
-      deadline: DateTime.now().add(const Duration(days: 30)),
-      milestones: ['Setup Environment', 'Learn Dart', 'First App', 'State Management'],
-      completedMilestones: 2,
-    ),
+    Goal(id: '1', title: 'Complete Data Structures Course', progress: 75),
+    Goal(id: '2', title: 'Learn Flutter Development', progress: 45),
   ];
 
   String selectedFilter = 'All';
@@ -90,7 +63,7 @@ class _StudentGoalScreenState extends State<StudentGoalScreen> {
           child: SafeArea(
             child: Column(
               children: [
-                _buildAppBar(context),
+                _buildAppBar(),
                 Expanded(
                   child: SingleChildScrollView(
                     physics: const BouncingScrollPhysics(),
@@ -142,7 +115,7 @@ class _StudentGoalScreenState extends State<StudentGoalScreen> {
     );
   }
 
-  _buildAppBar(BuildContext context) => Container(
+  _buildAppBar() => Container(
         decoration: const BoxDecoration(
           gradient: LinearGradient(colors: [AppColors.primary, AppColors.accent]),
         ),
@@ -250,8 +223,7 @@ class _StudentGoalScreenState extends State<StudentGoalScreen> {
               child: Container(
                 padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                 decoration: BoxDecoration(
-                  gradient:
-                      isSelected ? const LinearGradient(colors: [AppColors.primary, AppColors.accent]) : null,
+                  gradient: isSelected ? const LinearGradient(colors: [AppColors.primary, AppColors.accent]) : null,
                   color: isSelected ? null : AppColors.white,
                   borderRadius: BorderRadius.circular(20),
                 ),
