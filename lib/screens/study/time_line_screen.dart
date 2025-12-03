@@ -21,6 +21,14 @@ class TimelineEvent {
     this.grade = '',
   });
 
+  // بدل capitalize()
+  String get typeName {
+    final name = type.toString().split('.').last;
+    return name.isNotEmpty
+        ? name[0].toUpperCase() + name.substring(1)
+        : name;
+  }
+
   Color get typeColor {
     switch (type) {
       case TimelineEventType.course:
@@ -37,18 +45,11 @@ class TimelineEvent {
         return AppColors.accent;
     }
   }
-
-  String get typeName => type.toString().split('.').last.capitalize();
-}
-
-extension StringCasingExtension on String {
-  String capitalize() => isNotEmpty
-      ? '${this[0].toUpperCase()}${substring(1)}'
-      : '';
 }
 
 class TimelineScreen extends StatefulWidget {
   const TimelineScreen({Key? key}) : super(key: key);
+
   @override
   _TimelineScreenState createState() => _TimelineScreenState();
 }
@@ -92,8 +93,12 @@ class _TimelineScreenState extends State<TimelineScreen> {
 
   List<TimelineEvent> get filteredEvents {
     if (selectedFilter == 'All') return timelineEvents;
-    return timelineEvents.where((e) =>
-        e.status.name.capitalize() == selectedFilter).toList();
+
+    return timelineEvents.where((e) {
+      final name = e.status.name;
+      final formatted = name[0].toUpperCase() + name.substring(1);
+      return formatted == selectedFilter;
+    }).toList();
   }
 
   @override
@@ -118,7 +123,7 @@ class _TimelineScreenState extends State<TimelineScreen> {
           colors: [
             AppColors.limeGreen.withOpacity(0.15),
             AppColors.white,
-            AppColors.softGreen.withOpacity(0.1)
+            AppColors.softGreen.withOpacity(0.1),
           ],
         ),
       ),
@@ -152,61 +157,64 @@ class _TimelineScreenState extends State<TimelineScreen> {
   }
 
   Widget _buildAppBar(BuildContext context) => Container(
-    decoration: BoxDecoration(
-      gradient: const LinearGradient(colors: [AppColors.primary, AppColors.accent]),
-      boxShadow: [
-        BoxShadow(
-          color: AppColors.primary.withOpacity(0.2),
-          blurRadius: 20,
-          offset: const Offset(0, 4),
-        )
-      ],
-    ),
-    padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 14),
-    child: Center(
-      child: Text('My Journey',
-          style: AppTextStyles.h2.copyWith(color: AppColors.white, fontSize: 20)),
-    ),
-  );
+        decoration: BoxDecoration(
+          gradient: const LinearGradient(colors: [AppColors.primary, AppColors.accent]),
+          boxShadow: [
+            BoxShadow(
+              color: AppColors.primary.withOpacity(0.2),
+              blurRadius: 20,
+              offset: const Offset(0, 4),
+            )
+          ],
+        ),
+        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 14),
+        child: Center(
+          child: Text('My Journey',
+              style: AppTextStyles.h2.copyWith(color: AppColors.white, fontSize: 20)),
+        ),
+      );
 
   Widget _buildJourneyStats(Map<String, int> counts) => Container(
-    padding: const EdgeInsets.all(16),
-    decoration: BoxDecoration(
-      gradient: LinearGradient(colors: [
-        AppColors.white,
-        AppColors.limeGreen.withOpacity(0.3),
-      ]),
-      borderRadius: BorderRadius.circular(20),
-      boxShadow: [
-        BoxShadow(
-          color: AppColors.black.withOpacity(0.05),
-          blurRadius: 15,
-          offset: const Offset(0, 4),
-        )
-      ],
-    ),
-    child: Row(
-      mainAxisAlignment: MainAxisAlignment.spaceAround,
-      children: counts.entries.map((e) => Column(
-        children: [
-          Icon(
-            e.key == 'Completed'
-                ? Icons.check_circle
-                : e.key == 'Current'
-                    ? Icons.play_circle_outline
-                    : Icons.upcoming,
-            color: AppColors.grey,
-          ),
-          const SizedBox(height: 6),
-          Text('${e.value}', style: AppTextStyles.h1.copyWith(fontSize: 20)),
-          Text(e.key, style: AppTextStyles.tiny.copyWith(fontSize: 11)),
-        ],
-      )).toList(),
-    ),
-  );
+        padding: const EdgeInsets.all(16),
+        decoration: BoxDecoration(
+          gradient: LinearGradient(colors: [
+            AppColors.white,
+            AppColors.limeGreen.withOpacity(0.3),
+          ]),
+          borderRadius: BorderRadius.circular(20),
+          boxShadow: [
+            BoxShadow(
+              color: AppColors.black.withOpacity(0.05),
+              blurRadius: 15,
+              offset: const Offset(0, 4),
+            )
+          ],
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: counts.entries.map((e) {
+            return Column(
+              children: [
+                Icon(
+                  e.key == 'Completed'
+                      ? Icons.check_circle
+                      : e.key == 'Current'
+                          ? Icons.play_circle_outline
+                          : Icons.upcoming,
+                  color: AppColors.grey,
+                ),
+                const SizedBox(height: 6),
+                Text('${e.value}', style: AppTextStyles.h1.copyWith(fontSize: 20)),
+                Text(e.key, style: AppTextStyles.tiny.copyWith(fontSize: 11)),
+              ],
+            );
+          }).toList(),
+        ),
+      );
 
   Widget _buildFilterChips() {
     final filters = ['All', 'Completed', 'Current', 'Upcoming'];
+
     return SingleChildScrollView(
       scrollDirection: Axis.horizontal,
       child: Row(
@@ -220,17 +228,16 @@ class _TimelineScreenState extends State<TimelineScreen> {
                 padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                 decoration: BoxDecoration(
                   gradient: selected
-                      ? const LinearGradient(colors: [
-                          AppColors.primary,
-                          AppColors.accent
-                        ])
+                      ? const LinearGradient(
+                          colors: [AppColors.primary, AppColors.accent])
                       : null,
                   color: selected ? null : AppColors.white,
                   borderRadius: BorderRadius.circular(20),
                   border: Border.all(
-                      color: selected
-                          ? AppColors.primary
-                          : AppColors.grey.withOpacity(0.3)),
+                    color: selected
+                        ? AppColors.primary
+                        : AppColors.grey.withOpacity(0.3),
+                  ),
                   boxShadow: [
                     BoxShadow(
                       color: AppColors.black.withOpacity(0.05),
@@ -238,10 +245,12 @@ class _TimelineScreenState extends State<TimelineScreen> {
                     )
                   ],
                 ),
-                child: Text(f,
-                    style: AppTextStyles.label.copyWith(
-                        color:
-                            selected ? AppColors.white : AppColors.grey)),
+                child: Text(
+                  f,
+                  style: AppTextStyles.label.copyWith(
+                    color: selected ? AppColors.white : AppColors.grey,
+                  ),
+                ),
               ),
             ),
           );
@@ -251,52 +260,53 @@ class _TimelineScreenState extends State<TimelineScreen> {
   }
 
   Widget _buildTimeline() => Column(
-    children: List.generate(filteredEvents.length, (index) {
-      final e = filteredEvents[index];
-      return Padding(
-        padding: const EdgeInsets.symmetric(vertical: 12),
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            // Left line + dots
-            Container(
-              width: 40,
-              child: Column(
-                children: [
-                  if (index != 0)
-                    Container(
-                      height: 20,
-                      width: 2,
-                      color: AppColors.grey.withOpacity(0.3),
-                    ),
-                  Container(
-                    width: 12,
-                    height: 12,
-                    decoration: BoxDecoration(
-                      color: e.status == TimelineEventStatus.completed
-                          ? AppColors.primary
-                          : e.status == TimelineEventStatus.current
-                              ? AppColors.accent
-                              : AppColors.grey.withOpacity(0.3),
-                      shape: BoxShape.circle,
-                    ),
+        children: List.generate(filteredEvents.length, (index) {
+          final e = filteredEvents[index];
+
+          return Padding(
+            padding: const EdgeInsets.symmetric(vertical: 12),
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                // الخط والدائرة
+                SizedBox(
+                  width: 40,
+                  child: Column(
+                    children: [
+                      if (index != 0)
+                        Container(
+                          height: 20,
+                          width: 2,
+                          color: AppColors.grey.withOpacity(0.3),
+                        ),
+                      Container(
+                        width: 12,
+                        height: 12,
+                        decoration: BoxDecoration(
+                          color: e.status == TimelineEventStatus.completed
+                              ? AppColors.primary
+                              : e.status == TimelineEventStatus.current
+                                  ? AppColors.accent
+                                  : AppColors.grey.withOpacity(0.3),
+                          shape: BoxShape.circle,
+                        ),
+                      ),
+                      if (index != filteredEvents.length - 1)
+                        Container(
+                          height: 60,
+                          width: 2,
+                          color: AppColors.grey.withOpacity(0.3),
+                        ),
+                    ],
                   ),
-                  if (index != filteredEvents.length - 1)
-                    Container(
-                      height: 60,
-                      width: 2,
-                      color: AppColors.grey.withOpacity(0.3),
-                    ),
-                ],
-              ),
+                ),
+                const SizedBox(width: 12),
+                Expanded(child: _buildEventCard(e)),
+              ],
             ),
-            const SizedBox(width: 12),
-            Expanded(child: _buildEventCard(e)),
-          ],
-        ),
+          );
+        }),
       );
-    }),
-  );
 
   Widget _buildEventCard(TimelineEvent e) {
     final isCurrent = e.status == TimelineEventStatus.current;
@@ -311,7 +321,9 @@ class _TimelineScreenState extends State<TimelineScreen> {
         ]),
         borderRadius: BorderRadius.circular(16),
         border: Border.all(
-            color: e.typeColor.withOpacity(isCurrent ? 0.4 : 0.2), width: 1),
+          color: e.typeColor.withOpacity(isCurrent ? 0.4 : 0.2),
+          width: 1,
+        ),
         boxShadow: [
           BoxShadow(
             color: AppColors.black.withOpacity(0.05),
@@ -320,25 +332,35 @@ class _TimelineScreenState extends State<TimelineScreen> {
           )
         ],
       ),
-
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(e.typeName,
-              style: AppTextStyles.tiny.copyWith(
-                  color: e.typeColor,
-                  fontWeight: FontWeight.w600,
-                  fontSize: 11)),
+          Text(
+            e.typeName,
+            style: AppTextStyles.tiny.copyWith(
+              color: e.typeColor,
+              fontWeight: FontWeight.w600,
+              fontSize: 11,
+            ),
+          ),
           const SizedBox(height: 6),
-          Text(e.title,
-              style: AppTextStyles.button.copyWith(
-                  fontSize: 16, color: AppColors.darkBrown)),
+          Text(
+            e.title,
+            style: AppTextStyles.button.copyWith(
+              fontSize: 16,
+              color: AppColors.darkBrown,
+            ),
+          ),
           const SizedBox(height: 4),
-          Text(e.description,
-              style: AppTextStyles.small
-                  .copyWith(fontSize: 13, color: AppColors.grey),
-              maxLines: 2,
-              overflow: TextOverflow.ellipsis),
+          Text(
+            e.description,
+            style: AppTextStyles.small.copyWith(
+              fontSize: 13,
+              color: AppColors.grey,
+            ),
+            maxLines: 2,
+            overflow: TextOverflow.ellipsis,
+          ),
 
           if (isCurrent && e.progress != null) ...[
             const SizedBox(height: 8),
@@ -350,10 +372,12 @@ class _TimelineScreenState extends State<TimelineScreen> {
             ),
           ],
 
-          if (isCompleted && e.grade != '') ...[
+          if (isCompleted && e.grade.isNotEmpty) ...[
             const SizedBox(height: 8),
-            Text('Grade: ${e.grade}',
-                style: AppTextStyles.label.copyWith(color: e.typeColor)),
+            Text(
+              'Grade: ${e.grade}',
+              style: AppTextStyles.label.copyWith(color: e.typeColor),
+            ),
           ],
         ],
       ),
