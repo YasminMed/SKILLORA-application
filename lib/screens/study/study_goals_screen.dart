@@ -185,9 +185,7 @@ class _StudentGoalScreenState extends State<StudentGoalScreen> {
     );
   }
 
-  // =====================
-  // AppBar
-  // =====================
+//appbar
     _buildAppBar(BuildContext context) => Container(
         decoration: BoxDecoration(
           gradient: const LinearGradient(colors: [AppColors.primary, AppColors.accent]),
@@ -286,9 +284,7 @@ class _StudentGoalScreenState extends State<StudentGoalScreen> {
     );
   }
 
-  // =====================
-  // Filter Chips
-  // =====================
+//filters
   Widget _buildFilterChips() {
     final filters = ['All', 'Active', 'Completed'];
     return SingleChildScrollView(
@@ -318,9 +314,7 @@ class _StudentGoalScreenState extends State<StudentGoalScreen> {
     );
   }
 
-  // =====================
-  // Goals List
-  // =====================
+//goals list
   Widget _buildGoalsList() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
