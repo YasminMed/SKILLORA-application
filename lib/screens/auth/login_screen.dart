@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:skillora/screens/auth/forgot_password_screen.dart';
 import '../../constants/app_colors.dart';
 import '../../constants/app_text_styles.dart';
-import 'signup_screen.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
@@ -23,7 +21,6 @@ class LoginScreen extends StatelessWidget {
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
             stops: [0.0, 0.60]
-
           ),
         ),
 
@@ -126,9 +123,9 @@ class LoginScreen extends StatelessWidget {
                         alignment: Alignment.centerRight,
                         child: GestureDetector(
                           onTap: () {
-                            Navigator.push(
+                            Navigator.pushNamed(
                               context,
-                              MaterialPageRoute(builder: (_) => const ForgotPasswordEmailScreen()),
+                              '/forgot_password',
                             );
                           },
                           child: Text(
@@ -178,10 +175,9 @@ class LoginScreen extends StatelessWidget {
                               style: AppTextStyles.small),
                           GestureDetector(
                             onTap: () {
-                              Navigator.push(
+                              Navigator.pushNamed(
                                 context,
-                                MaterialPageRoute(
-                                    builder: (_) => const SignUpScreen()),
+                                '/signup',
                               );
                             },
                             child: Text(
